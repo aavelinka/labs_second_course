@@ -5,5 +5,7 @@ build/
 
 *.out
 
+.DS_Store
+
 CMakeCache.txt
 CMakeFiles/
