@@ -52,8 +52,8 @@ class Massive
         delete[] mas;
         mas = nullptr;
     };
-    friend ostream& operator<<(std::ostream&, const Massive&);
-    friend istream& operator>>(std::istream&, Massive&);
+    friend ostream& operator<<(ostream&, const Massive&);
+    friend istream& operator>>(istream&, Massive&);
     const Massive& operator=(const Massive&);
     int get_rows() const;
     int get_cols() const;

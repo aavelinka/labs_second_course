@@ -7,4 +7,4 @@
 ###     - Каждый класс в отдельном .h и .cpp файле          
 ###     - Отдельный .cpp файл для main
 
-## [Отчет по лабе]()
+## [Отчет по лабе](https://docs.google.com/document/d/1zXVKREqhXxC6FAmsbH7E0w_u6qvy1l4pgh2GX20vJVk/edit?tab=t.0#heading=h.eofnb5v6bjik)

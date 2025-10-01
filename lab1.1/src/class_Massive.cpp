@@ -1,24 +1,24 @@
 #include "class_Massive.h"
 
-ostream& operator<<(std::ostream& os, const Massive& matrix)
+ostream& operator<<(ostream& out, const Massive& matrix)
 {
     for(int i = 0; i < matrix.rows; ++i)
     {
-        os << "|" ;
+        out << "|" ;
         for(int j = 0; j < matrix.cols; ++j)
         {
-            os << matrix.mas[i][j];
+            out << matrix.mas[i][j];
             if(j < matrix.cols - 1)
             {
-                os << " ";
+                out << " ";
             } 
         }
-        os << "|" << endl;
+        out << "|" << endl;
     }
-    return os;
+    return out;
 }
 
-istream& operator>>(std::istream& in, Massive& matrix)
+istream& operator>>(istream& in, Massive& matrix)
 {
     cout << "Пожалуйста, введите кол-во строк и столбцов для матрицы: " << endl;
     in >> matrix.rows >> matrix.cols;
