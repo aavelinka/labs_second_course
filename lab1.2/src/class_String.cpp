@@ -9,15 +9,14 @@ ostream& operator<<(ostream& out, const String& str)
 
 istream& operator>>(istream& in, String& str)
 {
+    rewind(stdin);
     char init[79];
-    for(int i = 0; init[i] != '\n'; ++i)
-    {
-        in >> init[i];
-        str.lenth++;
-    }
-    str.info = new char[str.lenth];
-    str.info = init;
-    str.info[str.lenth + 1] = '\0';
+    in.getline(init, 79);
+
+    delete [] str.info;
+    str.lenth = strlen(init);
+    str.info = new char[str.lenth + 1];
+    strcpy(str.info, init);
 
     return in;
 }
@@ -25,15 +24,28 @@ istream& operator>>(istream& in, String& str)
 String String::operator+(const String& str) //объект + объект
 {
     String Result(this->lenth + str.lenth);
-    Result.info = strcat(this->info, str.info);
+    strcpy(Result.info, this->info);
+    strcat(Result.info, str.info);
 
     return Result;
+}
+
+String& String::operator+=(const String& str)
+{
+    // String Result(this->lenth + str.lenth);
+    // strcpy(Result.info, this->info);
+    // strcat(Result.info, str.info);
+    // *this = Result.info;
+    *this = *this + str;
+
+    return *this;
 }
 
 String String::operator+(const char* str) // объект + строка
 {
     String Result(this->lenth + strlen(str)); 
-    Result = strcat(this->info, str);
+    strcpy(Result.info, str);
+    Result = Result + *this;
     
     return Result;
 }
@@ -41,19 +53,84 @@ String String::operator+(const char* str) // объект + строка
 String operator+(char* str1, const String& str2) //строка + объект
 {
     String Result(strlen(str1) + str2.lenth);
-    Result.info = strcat(str1, str2.info);
+    strcpy(Result.info, str1);
+    strcat(Result.info, str2.info);
+    //String Result(*str1);
+    //Result = Result + str2;
 
     return Result;
 }
 
-String& String::operator+=(const String& str)
+String String::operator-(const String& str) // объект - объект
 {
-    String Result(this->lenth + str.lenth);
-    Result.info = strcat(this->info, str.info);
-    *this = Result.info;
+    String Result(this->lenth);
+    int realSize = 0;
+    for(int i = 0; i < this->lenth; ++i)
+    {
+        for(int j = 0; j < str.lenth; ++j)
+        {
+            if(this->info[i] != str.info[j])
+            {
+                Result.info[i] = this->info[i];
+                realSize++;
+            }
+        }
+    }
 
-    return *this;
+    Result.lenth = realSize;
+    // for(int i = 0; i < Result.lenth; ++i)
+    // {
+    // this->info[i] = Result.info[i];
+    // }
+    Result.info[Result.lenth + 1] = '\0';
+
+    return Result;
 }
+
+String String::operator-(const char* str) // объект - строка
+{
+    String Result(this->lenth);
+    int realSize = 0;
+    for(int i = 0; i < this->lenth; ++i)
+    {
+        for(int j = 0; j < strlen(str); ++j)
+        {
+            if(this->info[i] != str[j])
+            {
+                Result.info[i] = this->info[i];
+                realSize++;
+            }
+        }
+    }
+    Result.lenth = realSize;
+    Result.info[Result.lenth + 1] = '\0';
+
+    return Result;
+}
+
+String operator-(char* str1, const String& str2) // строка - объект
+{
+    String Result(strlen(str1));
+    int realSize = 0;
+    for(int i = 0; i < strlen(str1); ++i)
+    {
+        for(int j = 0; j < str2.lenth; ++j)
+        {
+            if(str1[i] != str2.info[j])
+            {
+                Result.info[i] = str1[i];
+                realSize++;
+            }
+        }
+    }
+
+    Result.lenth = realSize;
+    Result.info[Result.lenth + 1] = '\0';
+
+    return Result;
+}
+
+
 
 String& String::operator+=(const char* str)
 {
@@ -64,11 +141,67 @@ String& String::operator+=(const char* str)
     return *this;
 }
 
+String& String::operator-=(const String& str)
+{
+    String Result(this->lenth);
+    int realSize = 0;
+    for(int i = 0; i < this->lenth; ++i)
+    {
+        for(int j = 0; j < str.lenth; ++j)
+        {
+            if(this->info[i] != str.info[j])
+            {
+                Result.info[i] = this->info[i];
+                realSize++;
+            }
+        }
+    }
+
+    this->lenth = realSize;
+    for(int i = 0; i < this->lenth; ++i)
+    {
+        this->info[i] = Result.info[i];
+    }
+    this->info[this->lenth + 1] = '\0';
+
+    return *this;
+}
+
+String& String::operator-=(const char* str)
+{
+    String Result(this->lenth);
+    int realSize = 0;
+    for(int i = 0; i < this->lenth; ++i)
+    {
+        for(int j = 0; j < strlen(str); ++j)
+        {
+            if(this->info[i] != str[j])
+            {
+                Result.info[i] = this->info[i];
+                realSize++;
+            }
+        }
+    }
+
+    this->lenth = realSize;
+    for(int i = 0; i < this->lenth; ++i)
+    {
+        this->info[i] = Result.info[i];
+    }
+    this->info[this->lenth + 1] = '\0';
+
+    return *this;
+}
+
 String& String::operator=(const String& str)
 {
-    this->lenth = str.lenth;
-    this->info = new char[str.lenth];
-    this->info = str.info;
+    if(this != &str)
+    {
+        delete[] this->info;
+        this->lenth = str.lenth;
+        this->info = new char[str.lenth + 1];
+    }
+    strcpy(this->info, str.info);
 
     return *this;
 }
@@ -139,12 +272,56 @@ int String::operator<(const char* str)
     }
 }
 
-String& String::operator++()
+String& String::operator++() //закодировать  строку
 {
-    
+    for(int i = 0; i < this->lenth; ++i)
+    {
+        this->info[i] = 255 - this->info[i];
+    }
+
+    return *this;
 }
 
-String& String::operator--()
+String& String::operator--() //раскодировать строку
 {
+    for(int i = 0; i < this->lenth; ++i)
+    {
+        this->info[i] = 255 - this->info[i];
+    }
 
+    return *this;
+}
+
+String String::operator*(int number)
+{
+    String Result(this->lenth * number);
+    for(int i = 0; i < number; ++i)
+    {
+        Result += *this;
+        Result.info[this->lenth * (i + 1)] = ' ';
+    }
+
+    return Result;
+}
+
+String String::operator&(const String& str)
+{
+    String Result(this->lenth);
+    int realSize = 0;
+    for(int i = 0; i < this->lenth; ++i)
+    {
+        for(int j = 0; j < str.lenth; ++j)
+        {
+            if(this->info[i] == str.info[j])
+            {
+                Result.info[i] == this->info[i];
+                realSize++;
+            }
+        }
+    }
+
+    Result.lenth = realSize;
+    Result.info[Result.lenth + 1] = '\0';
+
+    return Result;
 }

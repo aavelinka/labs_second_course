@@ -8,13 +8,13 @@ using namespace std;
 class String
 {
     char* info;
-    int lenth = 0;
+    int lenth;
 
     public:
     String()
     {
-        char* info = new char[1];
-        info[0] = '\0';
+        info = nullptr;
+        lenth = 0;
     }
     String(int size)
     {
@@ -22,17 +22,17 @@ class String
         info = new char[lenth + 1];
         info[lenth + 1] = '\0';
     }
-    String(char* data)
+    String(char* str)
     {
-        lenth = strlen(data);
-        char* info = new char[lenth + 1];
-        info = data;
-        info[lenth + 1] = '\0';
+        lenth = strlen(str);
+        info = new char[lenth + 1];
+        strcpy(info, str);
     }
     String(const String& str)
     {
-        info = new char[str.lenth];
-        info = str.info;
+        lenth = str.lenth;
+        info = new char[str.lenth + 1];
+        strcpy(info, str.info);
     }
     ~String()
     {
@@ -41,11 +41,16 @@ class String
     }
     friend ostream& operator<<(ostream&, const String&);
     friend istream& operator>>(istream&, String&);
-    String operator+(const String&); // объект + объект
-    String operator+(const char*); // объект + строка
-    friend String operator+(char*, const String&); //строка + объект
-    String& operator+=(const String&);
+    String operator+(const String&);                 // объект + объект
+    String operator+(const char*);                   // объект + строка
+    friend String operator+(char*, const String&);   // строка + объект
+    String operator-(const String&);                // объект - объект
+    String operator-(const char*);                  // объект - строка
+    friend String operator-(char*, const String&);  // строка - объект
+    String& operator+=(const String&); 
     String& operator+=(const char*);
+    String& operator-=(const String&);
+    String& operator-=(const char*);
     String& operator=(const String&);
     char operator[](int);
     String operator()(int, int);
@@ -55,6 +60,8 @@ class String
     int operator<(const char*);
     String& operator++();
     String& operator--();
+    String operator*(int);                          //умножение строки на число
+    String operator&(const String&);
 };
 
 #endif
