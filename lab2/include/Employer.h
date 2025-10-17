@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Person.h"
+#include<iomanip>
 
 typedef struct Taxes
 {
@@ -8,18 +9,26 @@ typedef struct Taxes
     double sum;
 };
 
-class Employer : public Person
+class Employer : virtual public Person
 {
 protected:
     char license[30];
     Taxes taxe;
 
 public:
+    Employer() : Person()
+    {
+        strcpy(this->license, "No real license");
+        this->taxe.sum = 0.0;
+        this->taxe.time.day = 1;
+        this->taxe.time.month = 1;
+        this->taxe.time.year = 2000;
+    }
     Employer(char* n, Data data, char* l, Taxes t) : Person(n, data)
     {
-        strcpy(license, l);
-        taxe.sum = t.sum;
-        taxe.time = t.time;
+        strcpy(this->license, l);
+        this->taxe.sum = t.sum;
+        this->taxe.time = t.time;
     }
     Employer(const Employer& employer) : Person(employer.name, employer.birthday)
     {
@@ -29,10 +38,15 @@ public:
     }
     ~Employer(){};
 
+    friend ostream& operator<<(ostream&, Employer&);
+    friend istream& operator>>(istream&, Employer&);
+    Employer& operator=(Employer&);
     void setLicense(char*);
     const char* getLicense() const;
     void setTaxes(Taxes);
     Taxes getTaxes() const;
 
-    void show() override;
+    virtual void printHeader() override;
+    virtual void printTable() override;
+
 };

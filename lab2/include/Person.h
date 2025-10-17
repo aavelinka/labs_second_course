@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string.h>
+#include<iomanip>
 using namespace std;
 
 typedef struct Data 
@@ -16,27 +17,33 @@ class Person
 protected:
     char name[30];
     Data birthday;
-    // typedef struct Data                       //так почему-то неельзя объявить структуру и сразу переменную этого типа
-    // {
-    //     int day;
-    //     int month; 
-    //     int year;
-    // } birthday;
 
 public:
-    Person(const const char* n, Data data)
+    Person()
     {
-        strcpy(name, n);
-        birthday.day = data.day;
-        birthday.month = data.month;
-        birthday.year = data.year;
+        strcpy(this->name, "NoName");
+        this->birthday.day = 1;
+        this->birthday.month = 1;
+        this->birthday.year = 2000;
     }
-    virtual ~Person() = 0;
+    Person(const char* n, Data data)
+    {
+        strcpy(this->name, n);
+        this->birthday.day = data.day;
+        this->birthday.month = data.month;
+        this->birthday.year = data.year;
+    }
+    // Person(const Person&);
+    virtual ~Person(){}
 
+    friend ostream& operator<<(ostream&, Person&);
+    friend istream& operator>>(istream&, Person&);
+    Person& operator=(Person&);
     void setName(char*);
     const char* getName() const;
-    void setData(Data);
-    Data getData() const;
+    void setBirthday(Data);
+    Data getBirthday() const;
 
-    virtual void show();
+    virtual void printHeader();
+    virtual void printTable();
 };
