@@ -30,6 +30,19 @@ void menu()
     cout << "----------------------" << endl;
 }
 
+// void menu()
+// {
+//     cout << setw(24) << setfill('-') << "" << setfill(' ') << endl;
+//     cout << "|" << setw(10) << "" << "MENU" << setw(10) << "" << "|" << endl;
+//     cout << setw(24) << setfill('-') << "" << setfill(' ') << endl;
+//     cout << "| 1. Add dealer" << setw(8) << "" << "|" << endl;
+//     cout << "| 2. Show dealer" << setw(7) << "" << "|" << endl;
+//     cout << "| 3. Edit dealer" << setw(7) << "" << "|" << endl;
+//     cout << "| 4. Delete dealer" << setw(5) << "" << "|" << endl;
+//     cout << "| 5. Exit" << setw(13) << "" << "|" << endl;
+//     cout << setw(24) << setfill('-') << "" << setfill(' ') << endl;
+// }
+
 void addDealer()
 {
     if(i > MAX_DEALERS)
@@ -95,6 +108,17 @@ char editPunkt()
 
     return option;
 }
+
+// cout << setw(27) << setfill('-') << "" << setfill(' ') << endl;
+// cout << "| 1. Edit name" << setw(11) << "" << "|" << endl;
+// cout << "| 2. Edit birthday" << setw(7) << "" << "|" << endl;
+// cout << "| 3. Edit license" << setw(8) << "" << "|" << endl;
+// cout << "| 4. Edit taxe" << setw(11) << "" << "|" << endl;
+// cout << "| 5. Edit passport" << setw(7) << "" << "|" << endl;
+// cout << "| 6. Edit country" << setw(8) << "" << "|" << endl;
+// cout << "| 7. Edit address" << setw(8) << "" << "|" << endl;
+// cout << "| 8. Edit all" << setw(12) << "" << "|" << endl;
+// cout << setw(27) << setfill('-') << "" << setfill(' ') << endl;
 
 void editDealer()
 {
