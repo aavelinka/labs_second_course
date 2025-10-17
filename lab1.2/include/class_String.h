@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string.h>
+#include <limits.h>
 using namespace std;
 
 class String
@@ -41,12 +42,12 @@ class String
     }
     friend ostream& operator<<(ostream&, const String&);
     friend istream& operator>>(istream&, String&);
-    String operator+(const String&);                 // объект + объект
-    String operator+(const char*);                   // объект + строка
-    friend String operator+(char*, const String&);   // строка + объект
-    String operator-(const String&);                // объект - объект
-    String operator-(const char*);                  // объект - строка
-    friend String operator-(char*, const String&);  // строка - объект
+    String operator+(const String&);                            // объект + объект
+    String operator+(const char*);                              // объект + строка
+    friend String operator+(char*, const String&);              // строка + объект
+    String operator-(const String&);                            // объект - объект
+    String operator-(const char*);                              // объект - строка
+    friend String operator-(char*, const String&);              // строка - объект
     String& operator+=(const String&); 
     String& operator+=(const char*);
     String& operator-=(const String&);
@@ -60,7 +61,7 @@ class String
     int operator<(const char*);
     String& operator++();
     String& operator--();
-    String operator*(int);                          //умножение строки на число
+    String operator*(int);                                      //умножение строки на число
     String operator&(const String&);
 };
 

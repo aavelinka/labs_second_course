@@ -72,6 +72,6 @@ void Dealer::printTable() {
          << setw(2) << right << setfill('0') << country.time.day << "."
          << setw(2) << right << country.time.month << "."
          << setw(4) << right << country.time.year << setfill(' ') << " | "
-         << setw(37) << left << address << " |" << endl;
+         << setw(31) << left << address << " |" << endl;
     cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
 }

@@ -9,7 +9,8 @@ ostream& operator<<(ostream& out, const String& str)
 
 istream& operator>>(istream& in, String& str)
 {
-    rewind(stdin);
+    in.clear();
+    in.ignore(INT_MAX);
     char init[79];
     in.getline(init, 79);
 
@@ -21,7 +22,7 @@ istream& operator>>(istream& in, String& str)
     return in;
 }
 
-String String::operator+(const String& str) //объект + объект
+String String::operator+(const String& str)                             //объект + объект
 {
     String Result(this->lenth + str.lenth);
     strcpy(Result.info, this->info);
@@ -41,7 +42,7 @@ String& String::operator+=(const String& str)
     return *this;
 }
 
-String String::operator+(const char* str) // объект + строка
+String String::operator+(const char* str)                             // объект + строка
 {
     String Result(this->lenth + strlen(str)); 
     strcpy(Result.info, str);
@@ -50,7 +51,7 @@ String String::operator+(const char* str) // объект + строка
     return Result;
 }
 
-String operator+(char* str1, const String& str2) //строка + объект
+String operator+(char* str1, const String& str2)                       //строка + объект
 {
     String Result(strlen(str1) + str2.lenth);
     strcpy(Result.info, str1);
@@ -61,7 +62,7 @@ String operator+(char* str1, const String& str2) //строка + объект
     return Result;
 }
 
-String String::operator-(const String& str) // объект - объект
+String String::operator-(const String& str)                           // объект - объект
 {
     String Result(this->lenth);
     int realSize = 0;
@@ -87,7 +88,7 @@ String String::operator-(const String& str) // объект - объект
     return Result;
 }
 
-String String::operator-(const char* str) // объект - строка
+String String::operator-(const char* str)                             // объект - строка
 {
     String Result(this->lenth);
     int realSize = 0;
@@ -108,7 +109,7 @@ String String::operator-(const char* str) // объект - строка
     return Result;
 }
 
-String operator-(char* str1, const String& str2) // строка - объект
+String operator-(char* str1, const String& str2)                      // строка - объект
 {
     String Result(strlen(str1));
     int realSize = 0;
@@ -272,7 +273,7 @@ int String::operator<(const char* str)
     }
 }
 
-String& String::operator++() //закодировать  строку
+String& String::operator++()                               //закодировать  строку
 {
     for(int i = 0; i < this->lenth; ++i)
     {
@@ -282,7 +283,7 @@ String& String::operator++() //закодировать  строку
     return *this;
 }
 
-String& String::operator--() //раскодировать строку
+String& String::operator--()                               //раскодировать строку
 {
     for(int i = 0; i < this->lenth; ++i)
     {
