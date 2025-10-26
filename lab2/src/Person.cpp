@@ -53,8 +53,6 @@ Data Person::getBirthday() const
     return this->birthday;
 }
 
-
-
 void Person::printHeader() {
     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
     cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " |" << endl;

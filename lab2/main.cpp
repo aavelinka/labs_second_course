@@ -1,33 +1,34 @@
 #include "../include/Dealer.h"
-#define MAX_DEALERS 10
+#define MAX_PERSONS 10
 
-Dealer dealers[MAX_DEALERS];
+Dealer persons[MAX_PERSONS];
 int i = 0;
 
-
-// char choosePerson()
-// {
-//     cout << "------- Choose person -------" << endl;
-//     cout << "1. Employer" << endl;
-//     cout << "2. Tourist" << endl;
-//     cout << "3. Dealer" << endl;
-//     cout << "4. Exit" << endl;
-
-//     char choice;
-//     cin >> choice;
-
-//     return choice;
-// }
 
 void menu()
 {
     cout << "-------- MENU --------" << endl;
-    cout << "| 1. Add dealer      |" << endl;
-    cout << "| 2. Show dealer     |" << endl;
-    cout << "| 3. Edit dealer     |" << endl;
-    cout << "| 4. Delete dealer   |" << endl;
+    cout << "| 1. Add person      |" << endl;
+    cout << "| 2. Show persons    |" << endl;
+    cout << "| 3. Edit person     |" << endl;
+    cout << "| 4. Delete person   |" << endl;
     cout << "| 5. Exit            |" << endl;
     cout << "----------------------" << endl;
+}
+
+char choosePerson()
+{
+    cout << "------- Choose person -------" << endl;
+    cout << "| 1. Employer               |" << endl;
+    cout << "| 2. Tourist                |" << endl;
+    cout << "| 3. Dealer                 |" << endl;
+    cout << "| 4. Exit                   |" << endl;
+    cout << "-----------------------------" << endl;
+
+    char choice;
+    cin >> choice;
+
+    return choice;
 }
 
 // void menu()
@@ -43,72 +44,6 @@ void menu()
 //     cout << setw(24) << setfill('-') << "" << setfill(' ') << endl;
 // }
 
-void addDealer()
-{
-    if(i > MAX_DEALERS)
-    {
-        cout << "You can't add a new dealer" << endl;
-        return;
-    }
-
-    Dealer dealer;
-    cout << (i + 1) << ". Add dealer: " << endl;
-    cin >> dealer;
-    dealers[i++] = dealer;
-}
-
-void showDealersInTable()
-{
-    if(i == 0)
-    {
-        cout << "No dealers" << endl;
-        return;
-    }
-    
-    if(i > 0) {
-        dealers[0].printHeader();
-    }
-    
-    for(int j = 0; j < i; ++j)
-    {
-        dealers[j].printTable();
-    }
-}
-
-void showDealers()
-{
-    if(i == 0)
-    {
-        cout << "No dealers" << endl;
-        return;
-    }
-    for(int j = 0; j < i; ++j)
-    {
-        cout << (j + 1) << '.' << dealers[j];
-    }
-}
-
-
-char editPunkt()
-{
-    cout << "-------------------------" << endl;
-    cout << "| 1. Edit name          |" << endl;
-    cout << "| 2. Edit birthday      |" << endl;
-    cout << "| 3. Edit license       |" << endl;
-    cout << "| 4. Edit taxe          |" << endl;
-    cout << "| 5. Edit passport      |" << endl;
-    cout << "| 6. Edit country       |" << endl;
-    cout << "| 7. Edit address       |" << endl;
-    cout << "| 8. Edit all           |" << endl;
-    cout << "-------------------------" << endl;
-
-
-    char option;
-    cin >> option;
-
-    return option;
-}
-
 // cout << setw(27) << setfill('-') << "" << setfill(' ') << endl;
 // cout << "| 1. Edit name" << setw(11) << "" << "|" << endl;
 // cout << "| 2. Edit birthday" << setw(7) << "" << "|" << endl;
@@ -120,114 +55,82 @@ char editPunkt()
 // cout << "| 8. Edit all" << setw(12) << "" << "|" << endl;
 // cout << setw(27) << setfill('-') << "" << setfill(' ') << endl;
 
-void editDealer()
+void showPersonsInTable()
 {
-    showDealers();
-    cout << "What the dealer do you want to edit?\nChoice: ";
-    int numberDealer;
-    cin >> numberDealer;
+    persons[0].printHeader();
+    
+    for(int j = 0; j < i; ++j)
+    {
+        persons[j].printTable();
+    }
 
-    switch (editPunkt())
+}
+
+void showPersons()
+{
+    for(int j = 0; j < i; ++j)
     {
-    case '1':
-    {
-        char newName[30];
-        cout << "Enter new name: ";
-        cin >> newName;
-        dealers[numberDealer - 1].setName(newName);
-        break;
-    }
-    case '2':
-    {
-        Data newBirthday;
-        cout << "Enter new birthday(XX.YY.ZZZZ): ";
-        cin >> newBirthday.day >> newBirthday.month >> newBirthday.year;
-        dealers[numberDealer - 1].setBirthday(newBirthday);
-        break;
-    }
-    case '3':
-    {
-        char newLicense[30];
-        cout << "Enter new license: ";
-        cin >> newLicense;
-        dealers[numberDealer - 1].setLicense(newLicense);
-        break;
-    }
-    case '4':
-    {
-        Taxes newTaxe;
-        cout << "Enter new taxe:\nSumm - ";
-        cin >> newTaxe.sum;
-        cout << "Time(XX.YY.ZZZZ) - ";
-        cin >> newTaxe.time.day >> newTaxe.time.month >> newTaxe.time.year;
-        dealers[numberDealer - 1].setTaxes(newTaxe);
-        break;
-    }
-    case '5':
-    {
-        char newPassport[8];
-        cout << "Enter new data to passport: ";
-        cin >> newPassport;
-        dealers[numberDealer - 1].setPassport(newPassport);
-        break;
-    }
-    case '6':
-    {
-        Countries newCountry;
-        cout << "Enter new country(name and time): " << endl;
-        cout << "Name of country - ";
-        cin >> newCountry.countryName;
-        cout << "Time(XX.YY.ZZZZ) - ";
-        cin >> newCountry.time.day >> newCountry.time.month >> newCountry.time.month;
-        dealers[numberDealer - 1].setCountry(newCountry);
-        break;
-    }
-    case '7':
-    {
-        char newAddress[30];
-        cout << "Enter new address: ";
-        cin >> newAddress;
-        dealers[numberDealer - 1].setAddress(newAddress);
-        break;
-    }
-    case '8':
-    {
-        Dealer newDealer;
-        cin >> newDealer;
-        dealers[numberDealer - 1] = newDealer;
-        break;
-    }
+        cout << (j + 1) << '.' << persons[j].getName() << endl;
     }
 }
 
-void deleteDealer() //????????????????????
+void deletePerson() 
 {
-    showDealers();
-    cout << "What dealer do you want to delete?\nChoice: ";
-    int numberDealer;
-    cin >> numberDealer;
+    showPersons();
+    cout << "What person do you want to delete?\nChoice: ";
+    int numberPerson;
+    cin >> numberPerson;
 
-    for(int j = numberDealer - 1; j < i - 1; ++j)
+    for(int j = numberPerson - 1; j < i - 1; ++j)
     {
-        dealers[j] = dealers[j + 1];
+        persons[j] = persons[j + 1];
     }  
     i--; 
 }
 
-void actionDealer(char choice)
+void actionPerson(char action)
 {
-    if(choice == '1')
+    if(action == '1' || action == '3')
     {
-        addDealer();
-    } else if(choice == '2')
+        char chooseP = choosePerson();
+        if(action == '1')
+        {
+            if(i > MAX_PERSONS)
+            {
+                cout << "You can't add a new person" << endl;
+                return;
+            }
+            if(chooseP == '1')
+            {
+                static_cast<Employer&>(persons[i]).addEmployer(i);
+            } else if(chooseP == '2')
+            {
+                static_cast<Tourist&>(persons[i]).addTourist(i);
+            } else
+            {
+                persons[i].addDealer(i);
+            }
+        } else
+        {
+            showPersons();
+            cout << "What the person do you want to edit?\nChoice: ";
+            int numberPerson;
+            cin >> numberPerson;
+            persons[numberPerson - 1].editPerson();
+        }
+
+    } else if(action == '2' || action == '4')
     {
-        showDealersInTable();
-    } else if(choice == '3')
+       if(action == '2')
+       {
+            showPersonsInTable();
+       } else
+       {
+            deletePerson();
+       }
+    } else
     {
-        editDealer();
-    } else if(choice == '4')
-    {
-        deleteDealer();
+        return;
     }
 }
 
@@ -235,15 +138,16 @@ int main()
 {
     do
     {
-        char choice;
+        char action;
         menu();
-        cin >> choice;
-        if(choice == '5')
+        cout << "Choice: ";
+        cin >> action;
+        if(action == '5')
         {
             break;
         } else 
         {
-            actionDealer(choice);
+            actionPerson(action);
         }
 
     } while(true);

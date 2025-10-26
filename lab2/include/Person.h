@@ -22,9 +22,9 @@ public:
     Person()
     {
         strcpy(this->name, "NoName");
-        this->birthday.day = 1;
-        this->birthday.month = 1;
-        this->birthday.year = 2000;
+        this->birthday.day = 0;
+        this->birthday.month = 0;
+        this->birthday.year = 0;
     }
     Person(const char* n, Data data)
     {
@@ -43,6 +43,9 @@ public:
     const char* getName() const;
     void setBirthday(Data);
     Data getBirthday() const;
+
+    virtual char editPunkt() = 0;
+    virtual Person& editPerson() = 0;
 
     virtual void printHeader();
     virtual void printTable();

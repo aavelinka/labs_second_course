@@ -18,11 +18,11 @@ protected:
 public:
     Employer() : Person()
     {
-        strcpy(this->license, "No real license");
+        strcpy(this->license, " - ");
         this->taxe.sum = 0.0;
-        this->taxe.time.day = 1;
-        this->taxe.time.month = 1;
-        this->taxe.time.year = 2000;
+        this->taxe.time.day = 0;
+        this->taxe.time.month = 0;
+        this->taxe.time.year = 0;
     }
     Employer(char* n, Data data, char* l, Taxes t) : Person(n, data)
     {
@@ -45,6 +45,10 @@ public:
     const char* getLicense() const;
     void setTaxes(Taxes);
     Taxes getTaxes() const;
+
+    Employer& addEmployer(int&);
+    virtual char editPunkt() override;
+    virtual Employer& editPerson() override;
 
     virtual void printHeader() override;
     virtual void printTable() override;

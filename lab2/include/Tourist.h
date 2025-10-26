@@ -18,11 +18,11 @@ protected:
 public:
     Tourist() : Person()
     {
-        strcpy(this->passport, "00000001");
-        strcpy(this->country.countryName, "Belarus");
-        this->country.time.day = 1;
-        this->country.time.month = 1;
-        this->country.time.year = 2000;
+        strcpy(this->passport, " - ");
+        strcpy(this->country.countryName, " - ");
+        this->country.time.day = 0;
+        this->country.time.month = 0;
+        this->country.time.year = 0;
     }
     Tourist(char* n, Data data, char* p, Countries c) : Person(n, data)
     {
@@ -39,6 +39,10 @@ public:
     const char* getPassport() const;
     void setCountry(Countries);
     Countries getCountry() const;
+
+    Tourist& addTourist(int&);
+    virtual char editPunkt() override;
+    virtual Tourist& editPerson() override;
 
     virtual void printHeader() override;
     virtual void printTable() override;
