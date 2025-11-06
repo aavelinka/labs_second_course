@@ -36,23 +36,25 @@ public:
     };
 
     //Node& operator==(Node&); //?????????
+    Deque& operator=(Deque& tmp)
+    {
+        if(this != tmp)
+        {
+            top = tmp.top;
+            buttom = tmp.buttom;
+        }
+
+        return *this;
+    }
     friend ostream& operator<<(ostream& out, Deque& object)
     {
-        while(object.top != nullptr)
-        {
-            out << object.top->item << endl;
-            object.top = object.top->next;
-        }
+        out << object.top->item << endl;
 
         return out;
     }
     friend istream& operator>>(istream& in, Deque& object)
     {
-        while(object.top != nullptr)
-        {
-            in >> object.top->item;
-            object.top = object.top->next;
-        }
+        in >> object.top->item;
 
         return in;
     }

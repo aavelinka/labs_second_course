@@ -39,17 +39,18 @@ void showDeque()
     char show;
     cin >> show;
 
+    Deque<Person*> tmpDeque = myDeque;
     if(show == '1')
     {
-        while(!myDeque.isEmpty())
+        while(!tmpDeque.isEmpty())
         {
-            cout << *myDeque.peekFirst() << endl;
+            cout << *tmpDeque.popFront() << endl;
         }
     } else if(show == '2')
     {
-        while(!myDeque.isEmpty())
+        while(!tmpDeque.isEmpty())
         {
-            cout << *myDeque.peekLast() << endl;
+            cout << *tmpDeque.popBack() << endl;
         }
     } else
     {
