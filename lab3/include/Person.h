@@ -47,8 +47,8 @@ public:
     void setBirthday(Data);
     Data getBirthday() const;
 
-    virtual char editPunkt() = 0;
-    virtual Person& editPerson() = 0;
+    // virtual char editPunkt();
+    // virtual Person& editPerson();
 
     virtual void printHeader();
     virtual void printTable();

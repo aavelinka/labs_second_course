@@ -21,7 +21,7 @@ char addDeque()
     cout << "| 2. Add to Back       |" << endl;
     cout << "| 3. Exit              |" << endl;
     cout << "------------------------" << endl;
-
+    cout << "Choice: ";
     char add;
     cin >> add;
 
@@ -35,22 +35,23 @@ void showDeque()
     cout << "| 2. Show Back         |" << endl;
     cout << "| 3. Exit              |" << endl;
     cout << "------------------------" << endl;
-
+    cout << "Choice: ";
     char show;
     cin >> show;
 
     Deque<Person*> tmpDeque = myDeque;
+    (myDeque.peekFirst())->printHeader();
     if(show == '1')
     {
         while(!tmpDeque.isEmpty())
         {
-            cout << *tmpDeque.popFront() << endl;
+            (*tmpDeque.popFront()).printTable();
         }
     } else if(show == '2')
     {
         while(!tmpDeque.isEmpty())
         {
-            cout << *tmpDeque.popBack() << endl;
+            (*tmpDeque.popBack()).printTable();
         }
     } else
     {
@@ -65,7 +66,7 @@ void editDeque()
     cout << "| 2. Edit Back         |" << endl;
     cout << "| 3. Exit              |" << endl;
     cout << "------------------------" << endl;
-
+    cout << "Choice: ";
     char edit;
     cin >> edit;
 
@@ -90,7 +91,7 @@ void deleteDeque()
     cout << "| 2. Delete Back       |" << endl;
     cout << "| 3. Exit              |" << endl;
     cout << "------------------------" << endl;
-
+    cout << "Choice: ";
     char del;
     cin >> del;
 
@@ -116,69 +117,56 @@ char choosePerson()
     cout << "| 3. Dealer                 |" << endl;
     cout << "| 4. Exit                   |" << endl;
     cout << "-----------------------------" << endl;
-
+    cout << "Choice: ";
     char choice;
     cin >> choice;
 
     return choice;
 }
 
-// void menu()
-// {
-//     cout << setw(24) << setfill('-') << "" << setfill(' ') << endl;
-//     cout << "|" << setw(10) << "" << "MENU" << setw(10) << "" << "|" << endl;
-//     cout << setw(24) << setfill('-') << "" << setfill(' ') << endl;
-//     cout << "| 1. Add dealer" << setw(8) << "" << "|" << endl;
-//     cout << "| 2. Show dealer" << setw(7) << "" << "|" << endl;
-//     cout << "| 3. Edit dealer" << setw(7) << "" << "|" << endl;
-//     cout << "| 4. Delete dealer" << setw(5) << "" << "|" << endl;
-//     cout << "| 5. Exit" << setw(13) << "" << "|" << endl;
-//     cout << setw(24) << setfill('-') << "" << setfill(' ') << endl;
-// }
-
-// cout << setw(27) << setfill('-') << "" << setfill(' ') << endl;
-// cout << "| 1. Edit name" << setw(11) << "" << "|" << endl;
-// cout << "| 2. Edit birthday" << setw(7) << "" << "|" << endl;
-// cout << "| 3. Edit license" << setw(8) << "" << "|" << endl;
-// cout << "| 4. Edit taxe" << setw(11) << "" << "|" << endl;
-// cout << "| 5. Edit passport" << setw(7) << "" << "|" << endl;
-// cout << "| 6. Edit country" << setw(8) << "" << "|" << endl;
-// cout << "| 7. Edit address" << setw(8) << "" << "|" << endl;
-// cout << "| 8. Edit all" << setw(12) << "" << "|" << endl;
-// cout << setw(27) << setfill('-') << "" << setfill(' ') << endl;
-
 // void showPersonsInTable()
 // {
 //     persons[0].printHeader();
-    
 //     for(int j = 0; j < i; ++j)
 //     {
 //         persons[j].printTable();
 //     }
-
 // }
 
 void addPerson(char choice)
 {
     Person* person = nullptr;
-    if(choice == '1') {
-        person = new Employer;
-        cin >> *dynamic_cast<Employer*>(person);
-    } else if(choice == '2') {
-        person = new Tourist;
-        cin >> *dynamic_cast<Tourist*>(person);
-    } else {
-        person = new Dealer;
-        cin >> *dynamic_cast<Dealer*>(person);
+    if(choice == '1') 
+    {
+        Employer* newEmployer = new Employer();
+        cin >> *newEmployer;
+        // cout << "create Employer" << endl;
+        person = newEmployer;
+
+    } else if(choice == '2') 
+    {
+        Tourist* newTourist = new Tourist();
+        cin >> *newTourist;
+        // cout << "create Tourist" << endl;
+        person = newTourist;
+    } else 
+    {
+        Dealer* newDealer = new Dealer();
+        cin >> *newDealer;
+        person = newDealer;
     }
 
     char add = addDeque();
     if(add == '1')
     {
         myDeque.pushFront(person);
+        // cout << "Как объект класса - " << *person << endl;
+        // cout << "Как объект списка - " << *myDeque.popFront();
     } else if(add == '2')
     {
         myDeque.pushBack(person);
+        // cout << "Как объект класса - " << *person << endl;
+        // cout << "Как объект списка - " << *myDeque.popFront();
     } else 
     {
         return;

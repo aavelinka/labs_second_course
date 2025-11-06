@@ -70,78 +70,78 @@ Employer& Employer::addEmployer(int& i)
     return *this;
 }
 
-char Employer::editPunkt()
-{
-    cout << "-------------------------" << endl;
-    cout << "| 1. Edit name          |" << endl;
-    cout << "| 2. Edit birthday      |" << endl;
-    cout << "| 3. Edit license       |" << endl;
-    cout << "| 4. Edit taxe          |" << endl;
-    cout << "| 5. Edit all           |" << endl;
-    cout << "-------------------------" << endl;
+// char Employer::editPunkt()
+// {
+//     cout << "-------------------------" << endl;
+//     cout << "| 1. Edit name          |" << endl;
+//     cout << "| 2. Edit birthday      |" << endl;
+//     cout << "| 3. Edit license       |" << endl;
+//     cout << "| 4. Edit taxe          |" << endl;
+//     cout << "| 5. Edit all           |" << endl;
+//     cout << "-------------------------" << endl;
 
 
-    char option;
-    cin >> option;
+//     char option;
+//     cin >> option;
 
-    return option;
-}
+//     return option;
+// }
 
-Employer& Employer::editPerson()
-{
-    switch (editPunkt())
-    {
-    case '1':
-    {
-        char newName[30];
-        cout << "Enter new name: ";
-        cin >> newName;
-        this->setName(newName);
-        break;
-    }
-    case '2':
-    {
-        Data newBirthday;
-        cout << "Enter new birthday(XX.YY.ZZZZ): ";
-        cin >> newBirthday.day >> newBirthday.month >> newBirthday.year;
-        this->setBirthday(newBirthday);
-        break;
-    }
-    case '3':
-    {
-        char newLicense[30];
-        cout << "Enter new license: ";
-        cin >> newLicense;
-        this->setLicense(newLicense);
-        break;
-    }
-    case '4':
-    {
-        Taxes newTaxe;
-        cout << "Enter new taxe:\nSumm - ";
-        cin >> newTaxe.sum;
-        cout << "Time(XX.YY.ZZZZ) - ";
-        cin >> newTaxe.time.day >> newTaxe.time.month >> newTaxe.time.year;
-        this->setTaxes(newTaxe);
-        break;
-    } 
-    case '5':
-    {
-        Employer newEmployer;
-        cin >> newEmployer;
-        *this = newEmployer;
-        break;
-    }
-    }
+// Employer& Employer::editPerson()
+// {
+//     switch (editPunkt())
+//     {
+//     case '1':
+//     {
+//         char newName[30];
+//         cout << "Enter new name: ";
+//         cin >> newName;
+//         this->setName(newName);
+//         break;
+//     }
+//     case '2':
+//     {
+//         Data newBirthday;
+//         cout << "Enter new birthday(XX.YY.ZZZZ): ";
+//         cin >> newBirthday.day >> newBirthday.month >> newBirthday.year;
+//         this->setBirthday(newBirthday);
+//         break;
+//     }
+//     case '3':
+//     {
+//         char newLicense[30];
+//         cout << "Enter new license: ";
+//         cin >> newLicense;
+//         this->setLicense(newLicense);
+//         break;
+//     }
+//     case '4':
+//     {
+//         Taxes newTaxe;
+//         cout << "Enter new taxe:\nSumm - ";
+//         cin >> newTaxe.sum;
+//         cout << "Time(XX.YY.ZZZZ) - ";
+//         cin >> newTaxe.time.day >> newTaxe.time.month >> newTaxe.time.year;
+//         this->setTaxes(newTaxe);
+//         break;
+//     } 
+//     case '5':
+//     {
+//         Employer newEmployer;
+//         cin >> newEmployer;
+//         *this = newEmployer;
+//         break;
+//     }
+//     }
 
-    return *this;
-}
+//     return *this;
+// }
 
-void Employer::printHeader() {
-    cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(31) << "" << "+" << setw(13) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
-    cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " | " << setw(28) << left << "License" << " | " << setw(10) << left << "Tax Sum" << " | " << setw(10) << left << "Tax Date" << " |" << endl;
-    cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(31) << "" << "+" << setw(13) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
-}
+// void Employer::printHeader() {
+//     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(31) << "" << "+" << setw(13) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
+//     cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " | " << setw(28) << left << "License" << " | " << setw(10) << left << "Tax Sum" << " | " << setw(10) << left << "Tax Date" << " |" << endl;
+//     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(31) << "" << "+" << setw(13) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
+// }
 
 void Employer::printTable() {
     cout << "| " << setw(28) << left << name << " | "
@@ -152,6 +152,12 @@ void Employer::printTable() {
          << setw(10) << left << taxe.sum << " | "
          << setw(2) << right << setfill('0') << taxe.time.day << "."
          << setw(2) << right << taxe.time.month << "."
-         << setw(4) << right << taxe.time.year << setfill(' ') << " |" << endl;
-    cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(31) << "" << "+" << setw(13) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
+         << setw(4) << right << taxe.time.year << setfill(' ') << " | "
+         << setw(8) << left << " - " << " | "
+         << setw(15) << left << " - " << " | "
+         << setw(2) << right << " - " << "."
+         << setw(2) << right << " - " << "."
+         << setw(4) << right << " - " << setfill(' ') << " | "
+         << setw(31) << left << " - " << " |" << endl;
+    cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
 }

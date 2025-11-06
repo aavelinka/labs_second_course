@@ -44,9 +44,9 @@ public:
     Countries getCountry() const;
 
     Tourist& addTourist(int&);
-    virtual char editPunkt() override;
-    virtual Tourist& editPerson() override;
+    // virtual char editPunkt() override;
+    // virtual Tourist& editPerson() override;
 
-    virtual void printHeader() override;
+    // virtual void printHeader() override;
     virtual void printTable() override;
 };

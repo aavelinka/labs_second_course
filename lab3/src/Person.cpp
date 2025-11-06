@@ -54,9 +54,11 @@ Data Person::getBirthday() const
 }
 
 void Person::printHeader() {
-    cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
-    cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " |" << endl;
-    cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
+    cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
+    cout << "|" << "Person inforamtion" << setw(164) << "|"<< endl;
+    cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
+    cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " | " << setw(28) << left << "License" << " | " << setw(10) << left << "Tax Sum" << " | " << setw(10) << left << "Tax Date" << " | " << setw(8) << left << "Passport" << " | " << setw(15) << left << "Country" << " | " << setw(10) << left << "Visit Date" << " | " << setw(37) << left << "Address" << " |" << endl;
+    cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
 }
 
 void Person::printTable() {

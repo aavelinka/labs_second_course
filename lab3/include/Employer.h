@@ -50,10 +50,10 @@ public:
     Taxes getTaxes() const;
 
     Employer& addEmployer(int&);
-    virtual char editPunkt() override;
-    virtual Employer& editPerson() override;
+    // virtual char editPunkt() override;
+    // virtual Employer& editPerson() override;
 
-    virtual void printHeader() override;
+    // virtual void printHeader() override;
     virtual void printTable() override;
 
 };

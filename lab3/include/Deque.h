@@ -30,18 +30,22 @@ public:
         while(top != nullptr)
         {
             Node<T>* tmp = top;
-            top = tmp->prev;
+            top = top->prev;
             delete tmp;
         }
     };
 
     //Node& operator==(Node&); //?????????
-    Deque& operator=(Deque& tmp)
+    Deque& operator=(Deque& otherDeque)
     {
-        if(this != tmp)
+        if(this != otherDeque)
         {
-            top = tmp.top;
-            buttom = tmp.buttom;
+            struct Node<T>* tmp = otherDeque.top;
+            while(tmp != nullptr)
+            {
+                pushFront(tmp->item);
+                tmp = tmp->next;
+            }
         }
 
         return *this;
@@ -63,8 +67,7 @@ public:
         struct Node<T>* tmp = new Node<T>{object, nullptr, nullptr};
         if(top != nullptr)
         {
-            tmp->prev = top;
-            tmp->next = nullptr;
+            top->prev = tmp;
             top = tmp;
         } else
         {
@@ -76,8 +79,7 @@ public:
         struct Node<T>* tmp = new Node<T>{object, nullptr, nullptr};
         if(buttom != nullptr)
         {
-            tmp->next = buttom;
-            tmp->prev = nullptr;
+            buttom->next = tmp;
             buttom = tmp;
         } else
         {
