@@ -38,12 +38,13 @@ public:
     }
     ~Employer()
     {
-        delete &taxe;
     }
 
     friend ostream& operator<<(ostream&, Employer&);
     friend istream& operator>>(istream&, Employer&);
     Employer& operator=(Employer&);
+    bool operator==(const Employer& other) const;
+    bool operator<(const Employer& other) const;
     void setLicense(char*);
     const char* getLicense() const;
     void setTaxes(Taxes);
@@ -53,7 +54,7 @@ public:
     // virtual char editPunkt() override;
     // virtual Employer& editPerson() override;
 
-    // virtual void printHeader() override;
-    virtual void printTable() override;
+    virtual void printHeader() const override;
+    virtual void printTable() const override;
 
 };

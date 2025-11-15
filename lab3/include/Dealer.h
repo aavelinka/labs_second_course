@@ -23,6 +23,8 @@ public:
     friend ostream& operator<<(ostream&, Dealer&);
     friend istream& operator>>(istream&, Dealer&);
     Dealer& operator=(Dealer&);
+    bool operator==(const Dealer& other) const;
+    bool operator<(const Dealer& other) const;
     void setAddress(char*);
     const char* getAddress() const;
 
@@ -30,6 +32,6 @@ public:
     // virtual char editPunkt() override;
     // virtual Dealer& editPerson() override;
 
-    // virtual void printHeader() override;
-    virtual void printTable() override;
+    virtual void printHeader() const override;
+    virtual void printTable() const override;
 };

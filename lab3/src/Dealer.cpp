@@ -1,4 +1,5 @@
 #include "Dealer.h"
+#include <cstdio>
 
 ostream& operator<<(ostream& out, Dealer& dealer)
 {
@@ -36,6 +37,16 @@ Dealer& Dealer::operator=(Dealer& dealer)
     }
 
     return *this;
+}
+
+bool Dealer::operator==(const Dealer& other) const
+{
+    return Person::operator==(other);
+}
+
+bool Dealer::operator<(const Dealer& other) const
+{
+    return Person::operator<(other);
 }
 
 void Dealer::setAddress(char* add)
@@ -172,21 +183,19 @@ Dealer& Dealer::addDealer(int& i)
 //     cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
 // }
 
-void Dealer::printTable() {
-    cout << "| " << setw(28) << left << name << " | "
-         << setw(2) << right << setfill('0') << birthday.day << "." 
-         << setw(2) << right << birthday.month << "." 
-         << setw(4) << right << birthday.year << setfill(' ') << " | "
-         << setw(28) << left << license << " | "
-         << setw(10) << left << taxe.sum << " | "
-         << setw(2) << right << setfill('0') << taxe.time.day << "."
-         << setw(2) << right << taxe.time.month << "."
-         << setw(4) << right << taxe.time.year << setfill(' ') << " | "
-         << setw(8) << left << passport << " | "
-         << setw(15) << left << country.countryName << " | "
-         << setw(2) << right << setfill('0') << country.time.day << "."
-         << setw(2) << right << country.time.month << "."
-         << setw(4) << right << country.time.year << setfill(' ') << " | "
-         << setw(31) << left << address << " |" << endl;
-    cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
+void Dealer::printHeader() const {
+    cout << left;
+    cout << "| " << setw(4) << "Name" << " | " << setw(12) << "Birthday" << " | " << setw(7) << "License" << " | " << setw(7) << "Tax Sum" << " | " << setw(12) << "Tax Date" << " | " << setw(8) << "Passport" << " | " << setw(7) << "Country" << " | " << setw(12) << "Visit Date" << " | " << setw(7) << "Address" << " |" << endl;
+}
+
+void Dealer::printTable() const {
+    char birthdayStr[11], taxDateStr[11], visitDateStr[11];
+    sprintf(birthdayStr, "%02d.%02d.%04d", birthday.day, birthday.month, birthday.year);
+    sprintf(taxDateStr, "%02d.%02d.%04d", taxe.time.day, taxe.time.month, taxe.time.year);
+    sprintf(visitDateStr, "%02d.%02d.%04d", country.time.day, country.time.month, country.time.year);
+    char taxSumStr[20];
+    sprintf(taxSumStr, "%.2f", taxe.sum);
+    
+    cout << left;
+    cout << "| " << setw(4) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << address << " |" << endl;
 }

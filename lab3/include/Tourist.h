@@ -32,12 +32,13 @@ public:
     }
     ~Tourist()
     {
-        delete &country;
     }
 
     friend ostream& operator<<(ostream&, Tourist&);
     friend istream& operator>>(istream&, Tourist&);
     Tourist& operator=(Tourist&);
+    bool operator==(const Tourist& other) const;
+    bool operator<(const Tourist& other) const;
     void setPassport(char*);
     const char* getPassport() const;
     void setCountry(Countries);
@@ -47,6 +48,6 @@ public:
     // virtual char editPunkt() override;
     // virtual Tourist& editPerson() override;
 
-    // virtual void printHeader() override;
-    virtual void printTable() override;
+    virtual void printHeader() const override;
+    virtual void printTable() const override;
 };

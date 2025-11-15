@@ -5,6 +5,8 @@
 #include<iomanip>
 using namespace std;
 
+template<typename T> class Deque;
+
 typedef struct Data 
 {
     int day;
@@ -12,11 +14,19 @@ typedef struct Data
     int year;
 } ;
 
+enum SearchMode {
+    FULL_MATCH,
+    NAME,
+    BIRTHDAY,
+    BIRTH_YEAR
+};
+
 class Person
 {
 protected:
     char name[30];
     Data birthday;
+    static SearchMode currentSearchMode;
 
 public:
     Person()
@@ -33,23 +43,30 @@ public:
         this->birthday.month = data.month;
         this->birthday.year = data.year;
     }
-    // Person(const Person&);
     virtual ~Person()
     {
-        delete &birthday;
+    }
+
+    static void setSearchMode(SearchMode mode)
+    {
+        currentSearchMode = mode;
+    }
+
+    static SearchMode getSearchMode()
+    {
+        return currentSearchMode;
     }
 
     friend ostream& operator<<(ostream&, Person&);
     friend istream& operator>>(istream&, Person&);
     Person& operator=(Person&);
+    bool operator==(const Person& other) const;
+    bool operator<(const Person& other) const;
     void setName(char*);
     const char* getName() const;
     void setBirthday(Data);
     Data getBirthday() const;
 
-    // virtual char editPunkt();
-    // virtual Person& editPerson();
-
-    virtual void printHeader();
-    virtual void printTable();
+    virtual void printHeader() const = 0;
+    virtual void printTable() const = 0;
 };

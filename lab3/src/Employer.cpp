@@ -1,4 +1,5 @@
 #include "Employer.h"
+#include <cstdio>
 
 ostream& operator<<(ostream& out, Employer& employer)
 {
@@ -30,13 +31,19 @@ Employer& Employer::operator=(Employer& employer)
         static_cast<Person&>(*this) = static_cast<Person&>(employer);
         strcpy(this->license, employer.license);
         this->taxe = employer.taxe;
-        // this->taxe.sum = employer.taxe.sum;
-        // this->taxe.time.day = employer.taxe.time.day;
-        // this->taxe.time.month = employer.taxe.time.month;
-        // this->taxe.time.year = employer.taxe.time.year;
     }
 
     return *this;
+}
+
+bool Employer::operator==(const Employer& other) const
+{
+    return Person::operator==(other);
+}
+
+bool Employer::operator<(const Employer& other) const
+{
+    return Person::operator<(other);
 }
 
 void Employer::setLicense(char* l)
@@ -143,21 +150,18 @@ Employer& Employer::addEmployer(int& i)
 //     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(31) << "" << "+" << setw(13) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
 // }
 
-void Employer::printTable() {
-    cout << "| " << setw(28) << left << name << " | "
-         << setw(2) << right << setfill('0') << birthday.day << "." 
-         << setw(2) << right << birthday.month << "." 
-         << setw(4) << right << birthday.year << setfill(' ') << " | "
-         << setw(28) << left << license << " | "
-         << setw(10) << left << taxe.sum << " | "
-         << setw(2) << right << setfill('0') << taxe.time.day << "."
-         << setw(2) << right << taxe.time.month << "."
-         << setw(4) << right << taxe.time.year << setfill(' ') << " | "
-         << setw(8) << left << " - " << " | "
-         << setw(15) << left << " - " << " | "
-         << setw(2) << right << " - " << "."
-         << setw(2) << right << " - " << "."
-         << setw(4) << right << " - " << setfill(' ') << " | "
-         << setw(31) << left << " - " << " |" << endl;
-    cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
+void Employer::printHeader() const {
+    cout << left;
+    cout << "| " << setw(4) << "Name" << " | " << setw(12) << "Birthday" << " | " << setw(7) << "License" << " | " << setw(7) << "Tax Sum" << " | " << setw(12) << "Tax Date" << " | " << setw(8) << "Passport" << " | " << setw(7) << "Country" << " | " << setw(12) << "Visit Date" << " | " << setw(7) << "Address" << " |" << endl;
+}
+
+void Employer::printTable() const {
+    char birthdayStr[11], taxDateStr[11];
+    sprintf(birthdayStr, "%02d.%02d.%04d", birthday.day, birthday.month, birthday.year);
+    sprintf(taxDateStr, "%02d.%02d.%04d", taxe.time.day, taxe.time.month, taxe.time.year);
+    char taxSumStr[20];
+    sprintf(taxSumStr, "%.2f", taxe.sum);
+    
+    cout << left;
+    cout << "| " << setw(4) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(7) << " - " << " |" << endl;
 }

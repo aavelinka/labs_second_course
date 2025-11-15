@@ -1,4 +1,5 @@
 #include "Tourist.h"
+#include <cstdio>
 
 ostream& operator<<(ostream& out, Tourist& tourist)
 {
@@ -30,13 +31,19 @@ Tourist& Tourist::operator=(Tourist& tourist)
         static_cast<Person&>(*this) = static_cast<Person&>(tourist);
         strcpy(this->passport, tourist.passport);
         this->country = tourist.country;
-        // strcpy(this->country.countryName, tourist.country.countryName);
-        // this->country.time.day = tourist.country.time.day;
-        // this->country.time.month = tourist.country.time.month;
-        // this->country.time.year = tourist.country.time.year;
     }
 
     return *this;
+}
+
+bool Tourist::operator==(const Tourist& other) const
+{
+    return Person::operator==(other);
+}
+
+bool Tourist::operator<(const Tourist& other) const
+{
+    return Person::operator<(other);
 }
 
 void Tourist::setPassport(char* p)
@@ -144,21 +151,16 @@ Tourist& Tourist::addTourist(int& i)
 //     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(11) << "" << "+" << setw(18) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
 // }
 
-void Tourist::printTable() {
-    cout << "| " << setw(28) << left << name << " | "
-         << setw(2) << right << setfill('0') << birthday.day << "." 
-         << setw(2) << right << birthday.month << "." 
-         << setw(4) << right << birthday.year << setfill(' ') << " | "
-         << setw(28) << left << " - " << " | "
-         << setw(10) << left << " - " << " | "
-         << setw(2) << right << " - " << "."
-         << setw(2) << right << " - " << "."
-         << setw(4) << right << " - " << setfill(' ') << " | "
-         << setw(8) << left << passport << " | "
-         << setw(15) << left << country.countryName << " | "
-         << setw(2) << right << setfill('0') << country.time.day << "."
-         << setw(2) << right << country.time.month << "."
-         << setw(4) << right << country.time.year << setfill(' ') << " | "
-         << setw(31) << left << " - " << " |" << endl;
-    cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
+void Tourist::printHeader() const {
+    cout << left;
+    cout << "| " << setw(4) << "Name" << " | " << setw(12) << "Birthday" << " | " << setw(7) << "License" << " | " << setw(7) << "Tax Sum" << " | " << setw(12) << "Tax Date" << " | " << setw(8) << "Passport" << " | " << setw(7) << "Country" << " | " << setw(12) << "Visit Date" << " | " << setw(7) << "Address" << " |" << endl;
+}
+
+void Tourist::printTable() const {
+    char birthdayStr[11], visitDateStr[11];
+    sprintf(birthdayStr, "%02d.%02d.%04d", birthday.day, birthday.month, birthday.year);
+    sprintf(visitDateStr, "%02d.%02d.%04d", country.time.day, country.time.month, country.time.year);
+    
+    cout << left;
+    cout << "| " << setw(4) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << " - " << " |" << endl;
 }

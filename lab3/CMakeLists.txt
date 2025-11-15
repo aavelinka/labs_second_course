@@ -14,6 +14,8 @@ set(SOURCES
 )
 
 set(HEADERS
+    include/Deque.tpp
+    include/Deque.hpp
     include/Person.h
     include/Employer.h
     include/Tourist.h
