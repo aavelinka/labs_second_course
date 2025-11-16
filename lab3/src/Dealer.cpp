@@ -81,11 +81,8 @@ Dealer& Dealer::addDealer(int& i)
 //     cout << "| 7. Edit address       |" << endl;
 //     cout << "| 8. Edit all           |" << endl;
 //     cout << "-------------------------" << endl;
-
-
 //     char option;
 //     cin >> option;
-
 //     return option;
 // }
 
@@ -94,7 +91,6 @@ Dealer& Dealer::addDealer(int& i)
 //     cout << "What the dealer do you want to edit?\nChoice: ";
 //     int numberDealer;
 //     cin >> numberDealer;
-
 //     switch (editPunkt())
 //     {
 //     case '1':
@@ -171,7 +167,6 @@ Dealer& Dealer::addDealer(int& i)
 //         break;
 //     }
 //     }
-
 //     return *this;
 // }
 

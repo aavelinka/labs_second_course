@@ -51,7 +51,6 @@ public:
     {
         currentSearchMode = mode;
     }
-
     static SearchMode getSearchMode()
     {
         return currentSearchMode;

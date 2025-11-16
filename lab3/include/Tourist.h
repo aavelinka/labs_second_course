@@ -30,9 +30,7 @@ public:
         this->country.time = c.time;
         strcpy(this->country.countryName, c.countryName);
     }
-    ~Tourist()
-    {
-    }
+    ~Tourist(){ }
 
     friend ostream& operator<<(ostream&, Tourist&);
     friend istream& operator>>(istream&, Tourist&);

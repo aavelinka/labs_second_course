@@ -18,7 +18,7 @@ void menu()
     cout << "-----------------------" << endl;
 }
 
-char addDeque()
+void addDeque(Person* person)
 {
     cout << "--------- MENU ---------" << endl;
     cout << "| 1. Add to Front      |" << endl;
@@ -29,7 +29,16 @@ char addDeque()
     char add;
     cin >> add;
 
-    return add;
+    if(add == '1')
+    {
+        myDeque.pushFront(person);
+    } else if(add == '2')
+    {
+        myDeque.pushBack(person);
+    } else 
+    {
+        return;
+    }
 }
 
 void showDeque()
@@ -47,14 +56,12 @@ void showDeque()
     {
         cout << "Deque is empty!" << endl;
         return;
-    }
-
-    if(!myDeque.isEmpty())
+    } else 
     {
         (myDeque.peekFirst())->printHeader();
+        Deque<Person*> tmpDeque = myDeque;
         if(show == '1')
         {
-            Deque<Person*> tmpDeque = myDeque;
             while(!tmpDeque.isEmpty())
             {
                 Person* p = tmpDeque.popFront();
@@ -63,10 +70,8 @@ void showDeque()
                     p->printTable();
                 }
             }
-        } 
-        else if(show == '2')
+        } else if(show == '2')
         {
-            Deque<Person*> tmpDeque = myDeque;
             while(!tmpDeque.isEmpty())
             {
                 Person* p = tmpDeque.popBack();
@@ -89,16 +94,15 @@ void updatePersonFields(Person* person)
     cout << "| 2. Birthday                     |" << endl;
     cout << "-----------------------------------" << endl;
     cout << "Choice: ";
-    int choice;
+    char choice;
     cin >> choice;
     
-    if(choice == 1)
+    if(choice == '1')
     {
         cout << "New name: ";
         cin >> name;
         person->setName(name);
-    }
-    else if(choice == 2)
+    } else if(choice == '2')
     {
         cout << "New birthday(DD MM YYYY): ";
         cin >> bd.day >> bd.month >> bd.year;
@@ -111,29 +115,29 @@ void updateEmployerFields(Employer* employer)
     char license[30];
     Taxes tax;
     
-    cout << "------- Select Employer Field -------" << endl;
-    cout << "| 1. License                      |" << endl;
+    cout << "------- Select Employer Field ------" << endl;
+    cout << "| 1. License                       |" << endl;
     cout << "| 2. Tax Sum                       |" << endl;
     cout << "| 3. Tax Date                      |" << endl;
     cout << "------------------------------------" << endl;
     cout << "Choice: ";
-    int choice;
+    char choice;
     cin >> choice;
     
-    if(choice == 1)
+    if(choice == '1')
     {
         cout << "New license: ";
         cin >> license;
         employer->setLicense(license);
     }
-    else if(choice == 2)
+    else if(choice == '2')
     {
         cout << "New tax sum: ";
         cin >> tax.sum;
         tax.time = employer->getTaxes().time;
         employer->setTaxes(tax);
     }
-    else if(choice == 3)
+    else if(choice == '3')
     {
         cout << "New tax date(DD MM YYYY): ";
         cin >> tax.time.day >> tax.time.month >> tax.time.year;
@@ -153,23 +157,21 @@ void updateTouristFields(Tourist* tourist)
     cout << "| 3. Visit Date                   |" << endl;
     cout << "-----------------------------------" << endl;
     cout << "Choice: ";
-    int choice;
+    char choice;
     cin >> choice;
     
-    if(choice == 1)
+    if(choice == '1')
     {
         cout << "New passport: ";
         cin >> passport;
         tourist->setPassport(passport);
-    }
-    else if(choice == 2)
+    } else if(choice == '2')
     {
         cout << "New country name: ";
         cin >> country.countryName;
         country.time = tourist->getCountry().time;
         tourist->setCountry(country);
-    }
-    else if(choice == 3)
+    } else if(choice == '3')
     {
         cout << "New visit date(DD MM YYYY): ";
         cin >> country.time.day >> country.time.month >> country.time.year;
@@ -186,10 +188,10 @@ void updateDealerFields(Dealer* dealer)
     cout << "| 1. Address                      |" << endl;
     cout << "-----------------------------------" << endl;
     cout << "Choice: ";
-    int choice;
+    char choice;
     cin >> choice;
     
-    if(choice == 1)
+    if(choice == '1')
     {
         cout << "New address: ";
         cin >> address;
@@ -210,109 +212,120 @@ void modifyObject()
     cout << "| 2. Modify Last                     |" << endl;
     cout << "--------------------------------------" << endl;
     cout << "Choice: ";
-    int sideChoice;
+    char sideChoice;
     cin >> sideChoice;
     
-    Person* person = (sideChoice == 1) ? myDeque.peekFirst() : myDeque.peekLast();
+    Person* person;
+    if(sideChoice == '1')
+    {
+        person = myDeque.peekFirst();
+    } else
+    {
+        person = myDeque.peekLast();
+    } 
     
     if(person == nullptr)
     {
         cout << "Error: Person is null!" << endl;
         return;
-    }
-    
-    Dealer* dealer = dynamic_cast<Dealer*>(person);
-    Employer* employer = dynamic_cast<Employer*>(person);
-    Tourist* tourist = dynamic_cast<Tourist*>(person);
-    
-    cout << "------- Modify Options -------" << endl;
-    cout << "| 1. Change All Data          |" << endl;
-    cout << "| 2. Change Specific Field    |" << endl;
-    cout << "------------------------------" << endl;
-    cout << "Choice: ";
-    int modifyChoice;
-    cin >> modifyChoice;
-    
-    if(modifyChoice == 1)
+    } else
     {
-        if(dealer != nullptr)
+        Dealer* dealer = dynamic_cast<Dealer*>(person);
+        Employer* employer = dynamic_cast<Employer*>(person);
+        Tourist* tourist = dynamic_cast<Tourist*>(person);
+        
+        cout << "------- Modify Options -------" << endl;
+        cout << "| 1. Change All Data         |" << endl;
+        cout << "| 2. Change Specific Field   |" << endl;
+        cout << "------------------------------" << endl;
+        cout << "Choice: ";
+        char modifyChoice;
+        cin >> modifyChoice;
+        
+        if(modifyChoice == '1')
         {
-            cin >> *dealer;
-        }
-        else if(employer != nullptr)
-        {
-            cin >> *employer;
-        }
-        else if(tourist != nullptr)
-        {
-            cin >> *tourist;
-        }
-        else
-        {
-            cin >> *person;
-        }
-        return;
-    }
-    
-    int numFieldOptions = 1;
-    cout << "------- Select Field Category -------" << endl;
-    cout << "| 1. Person Fields                  |" << endl;
-    
-    if(employer != nullptr)
-    {
-        cout << "| " << (numFieldOptions + 1) << ". Employer Fields              |" << endl;
-        numFieldOptions++;
-    }
-    if(tourist != nullptr)
-    {
-        cout << "| " << (numFieldOptions + 1) << ". Tourist Fields               |" << endl;
-        numFieldOptions++;
-    }
-    if(dealer != nullptr)
-    {
-        cout << "| " << (numFieldOptions + 1) << ". Dealer Fields                |" << endl;
-        numFieldOptions++;
-    }
-    cout << "--------------------------------------" << endl;
-    cout << "Choice: ";
-    int fieldChoice;
-    cin >> fieldChoice;
-    
-    int currentOption = 1;
-    
-    if(fieldChoice == currentOption)
-    {
-        updatePersonFields(person);
-        return;
-    }
-    currentOption++;
-    
-    if(employer != nullptr)
-    {
-        if(fieldChoice == currentOption)
-        {
-            updateEmployerFields(employer);
+            if(dealer != nullptr)
+            {
+                cin >> *dealer;
+            }
+            else if(employer != nullptr)
+            {
+                cin >> *employer;
+            }
+            else if(tourist != nullptr)
+            {
+                cin >> *tourist;
+            }
+            else
+            {
+                cin >> *person;
+            }
             return;
-        }
-        currentOption++;
-    }
-    
-    if(tourist != nullptr)
-    {
-        if(fieldChoice == currentOption)
+        } else
         {
-            updateTouristFields(tourist);
-            return;
-        }
-        currentOption++;
-    }
-    
-    if(dealer != nullptr)
-    {
-        if(fieldChoice == currentOption)
-        {
-            updateDealerFields(dealer);
-            return;
+            int numFieldOptions = 1;
+            cout << "------- Select Field Category -------" << endl;
+            cout << "| 1. Person Fields                  |" << endl;
+            
+            if(employer != nullptr)
+            {
+                cout << "| " << (numFieldOptions + 1) << ". Employer Fields              |" << endl;
+                numFieldOptions++;
+            }
+
+            if(tourist != nullptr)
+            {
+                cout << "| " << (numFieldOptions + 1) << ". Tourist Fields               |" << endl;
+                numFieldOptions++;
+            }
+
+            if(dealer != nullptr)
+            {
+                cout << "| " << (numFieldOptions + 1) << ". Dealer Fields                |" << endl;
+                numFieldOptions++;
+            }
+            cout << "--------------------------------------" << endl;
+            cout << "Choice: ";
+            int fieldChoice;
+            cin >> fieldChoice;
+            
+            int currentOption = 1;
+            
+            if(fieldChoice == currentOption)
+            {
+                updatePersonFields(person);
+                return;
+            }
+            currentOption++;
+            
+            if(employer != nullptr)
+            {
+                if(fieldChoice == currentOption)
+                {
+                    updateEmployerFields(employer);
+                    return;
+                }
+                currentOption++;
+            }
+            
+            if(tourist != nullptr)
+            {
+                if(fieldChoice == currentOption)
+                {
+                    updateTouristFields(tourist);
+                    return;
+                }
+                currentOption++;
+            }
+            
+            if(dealer != nullptr)
+            {
+                if(fieldChoice == currentOption)
+                {
+                    updateDealerFields(dealer);
+                    return;
+                }
+            }
         }
     }
 }
@@ -362,15 +375,6 @@ char choosePerson()
     return choice;
 }
 
-// void showPersonsInTable()
-// {
-//     persons[0].printHeader();
-//     for(int j = 0; j < i; ++j)
-//     {
-//         persons[j].printTable();
-//     }
-// }
-
 void addPerson(char choice)
 {
     Person* person = nullptr;
@@ -391,24 +395,12 @@ void addPerson(char choice)
     {
         Dealer* newDealer = new Dealer();
         cin >> *newDealer;
+        // cout << "create Dealer" << endl;
         person = newDealer;
     }
 
-    char add = addDeque();
-    if(add == '1')
-    {
-        myDeque.pushFront(person);
-        // cout << "Как объект класса - " << *person << endl;
-        // cout << "Как объект списка - " << *myDeque.popFront();
-    } else if(add == '2')
-    {
-        myDeque.pushBack(person);
-        // cout << "Как объект класса - " << *person << endl;
-        // cout << "Как объект списка - " << *myDeque.popFront();
-    } else 
-    {
-        return;
-    }
+    addDeque(person);
+    return;
 }
 
 void searchDeque()
@@ -427,75 +419,76 @@ void searchDeque()
     cout << "| 5. Exit                        |" << endl;
     cout << "-----------------------------------" << endl;
     cout << "Choice: ";
-    int choice;
+    char choice;
     cin >> choice;
     
-    if(choice < 1 || choice > 4)
+    if(choice < '1' || choice > '4')
     {
         return;
-    }
-    
-    Employer* searchKey = new Employer();
-    SearchMode mode = FULL_MATCH;
-    
-    if(choice == 1)
+    } else
     {
-        cout << "Enter name to search: ";
-        char name[30];
-        cin >> name;
-        searchKey->setName(name);
-        Person::setSearchMode(NAME);
-    }
-    else if(choice == 2)
-    {
-        cout << "Enter birthday(DD MM YYYY): ";
-        Data bd;
-        cin >> bd.day >> bd.month >> bd.year;
-        searchKey->setBirthday(bd);
-        Person::setSearchMode(BIRTHDAY);
-    }
-    else if(choice == 3)
-    {
-        cout << "Enter birth year to search: ";
-        Data bd;
-        bd.day = 0;
-        bd.month = 0;
-        cin >> bd.year;
-        searchKey->setBirthday(bd);
-        Person::setSearchMode(BIRTH_YEAR);
-    }
-    else
-    {
-        cout << "Enter criteria for Full Match:" << endl;
-        cout << "Enter name: ";
-        char name[30];
-        cin >> name;
-        searchKey->setName(name);
-        cout << "Enter birthday(DD MM YYYY): ";
-        Data bd;
-        cin >> bd.day >> bd.month >> bd.year;
-        searchKey->setBirthday(bd);
-        Person::setSearchMode(FULL_MATCH);
-    }
-    
-    Person* searchPerson = searchKey;
-    
-    Deque<Person*> results = myDeque.search(searchPerson);
-    Person::setSearchMode(FULL_MATCH);
-    delete searchKey;
-    
-    if(results.isEmpty())
-    {
-        cout << "No matches found." << endl;
-    }
-    else
-    {
-        cout << "Search results (" << results.size() << " found):" << endl;
-        results.peekFirst()->printHeader();
-        Deque<Person*> tmpResults = results;
-        while(!tmpResults.isEmpty())
+        Employer* searchKey = new Employer();
+        SearchMode mode = FULL_MATCH;
+        
+        if(choice == '1')
         {
-            (*tmpResults.popFront()).printTable();
+            cout << "Enter name to search: ";
+            char name[30];
+            cin >> name;
+            searchKey->setName(name);
+            Person::setSearchMode(NAME);
+        }
+        else if(choice == '2')
+        {
+            cout << "Enter birthday(DD MM YYYY): ";
+            Data bd;
+            cin >> bd.day >> bd.month >> bd.year;
+            searchKey->setBirthday(bd);
+            Person::setSearchMode(BIRTHDAY);
+        }
+        else if(choice == '3')
+        {
+            cout << "Enter birth year to search: ";
+            Data bd;
+            bd.day = 0;
+            bd.month = 0;
+            cin >> bd.year;
+            searchKey->setBirthday(bd);
+            Person::setSearchMode(BIRTH_YEAR);
+        }
+        else
+        {
+            cout << "Enter criteria for Full Match:" << endl;
+            cout << "Enter name: ";
+            char name[30];
+            cin >> name;
+            searchKey->setName(name);
+            cout << "Enter birthday(DD MM YYYY): ";
+            Data bd;
+            cin >> bd.day >> bd.month >> bd.year;
+            searchKey->setBirthday(bd);
+            Person::setSearchMode(FULL_MATCH);
+        }
+        
+        Person* searchPerson = searchKey;
+        
+        Deque<Person*> results = myDeque.search(searchPerson);
+        Person::setSearchMode(FULL_MATCH);
+        delete searchKey;
+        
+        if(results.isEmpty())
+        {
+            cout << "No matches found." << endl;
+        }
+        else
+        {
+            cout << "Search results (" << results.size() << " found):" << endl;
+            results.peekFirst()->printHeader();
+            Deque<Person*> tmpResults = results;
+            while(!tmpResults.isEmpty())
+            {
+                (*tmpResults.popFront()).printTable();
+            }
         }
     }
 }
@@ -595,7 +588,7 @@ int main()
 
     } while(true);
     
-    while(!myDeque.isEmpty())
+    while(!myDeque.isEmpty()) //ощичаем дек
     {
         Person* person = myDeque.popFront();
         delete person;

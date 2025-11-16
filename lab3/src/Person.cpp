@@ -14,7 +14,7 @@ istream& operator>>(istream& in, Person& person)
 {
     cout << "Enter name: " ;
     in >> person.name;
-    cout << "Enter birthday(XX.YY.ZZZZ): ";
+    cout << "Enter birthday(DD MM YYYY): ";
     in >> person.birthday.day >> person.birthday.month >> person.birthday.year;
 
     return in;

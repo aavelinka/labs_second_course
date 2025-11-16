@@ -18,7 +18,7 @@ istream& operator>>(istream& in, Tourist& tourist)
     cout << "Enter country(name and time): " << endl;
     cout << "Name of country - "; 
     in >> tourist.country.countryName;
-    cout << "Time(XX.YY.ZZZZ) - ";
+    cout << "Time(DD MM YYYY) - ";
     in >> tourist.country.time.day >> tourist.country.time.month >> tourist.country.time.year;
 
     return in;
@@ -86,11 +86,8 @@ Tourist& Tourist::addTourist(int& i)
 //     cout << "| 4. Edit country       |" << endl;
 //     cout << "| 5. Edit all           |" << endl;
 //     cout << "-------------------------" << endl;
-
-
 //     char option;
 //     cin >> option;
-
 //     return option;
 // }
 
@@ -141,7 +138,6 @@ Tourist& Tourist::addTourist(int& i)
 //         break;
 //     }
 //     }
-
 //     return *this;
 // }
 

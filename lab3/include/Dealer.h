@@ -18,7 +18,7 @@ public:
     {
         strcpy(this->address, ad);
     }
-    ~Dealer(){};
+    ~Dealer(){ }
 
     friend ostream& operator<<(ostream&, Dealer&);
     friend istream& operator>>(istream&, Dealer&);

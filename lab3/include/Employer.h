@@ -36,9 +36,7 @@ public:
         this->taxe.sum = employer.taxe.sum;
         this->taxe.time = employer.taxe.time;
     }
-    ~Employer()
-    {
-    }
+    ~Employer() { }
 
     friend ostream& operator<<(ostream&, Employer&);
     friend istream& operator>>(istream&, Employer&);
