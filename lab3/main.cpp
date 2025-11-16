@@ -330,11 +330,6 @@ void modifyObject()
     }
 }
 
-void editDeque()
-{
-    modifyObject();
-}
-
 void deleteDeque()
 {
     cout << "--------- MENU ---------" << endl;
@@ -557,7 +552,7 @@ void actionPerson(char action)
         showDeque();
     } else if(action == '3')
     {
-        editDeque();
+        modifyObject();
     } else if(action == '4')
     {
         deleteDeque();
