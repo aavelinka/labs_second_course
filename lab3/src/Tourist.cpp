@@ -38,12 +38,12 @@ Tourist& Tourist::operator=(Tourist& tourist)
 
 bool Tourist::operator==(const Tourist& other) const
 {
-    return Person::operator==(other);
+    return this->Person::operator==(other);
 }
 
 bool Tourist::operator<(const Tourist& other) const
 {
-    return Person::operator<(other);
+    return this->Person::operator<(other);
 }
 
 void Tourist::setPassport(char* p)
@@ -146,6 +146,45 @@ Tourist& Tourist::addTourist(int& i)
 //     cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " | " << setw(8) << left << "Passport" << " | " << setw(15) << left << "Country" << " | " << setw(10) << left << "Visit Date" << " |" << endl;
 //     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(11) << "" << "+" << setw(18) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
 // }
+
+void Tourist::updateFields(char choiceField)
+{
+    char passport[8];
+    Countries country;
+    
+    if(choiceField <= 2)
+    {
+        this->Person::updateFields(choiceField);
+        return;
+    }
+
+    switch(choiceField)
+    {
+        case 3:
+        {
+            cout << "New passport: ";
+            cin >> passport;
+            this->setPassport(passport);
+            break;
+        }
+        case 4:
+        {
+            cout << "New country name: ";
+            cin >> country.countryName;
+            country.time = this->getCountry().time;
+            this->setCountry(country);
+            break;   
+        }
+        case 5:
+        {
+            cout << "New visit date(DD MM YYYY): ";
+            cin >> country.time.day >> country.time.month >> country.time.year;
+            strcpy(country.countryName, this->getCountry().countryName);
+            this->setCountry(country);
+            break;   
+        }
+    }
+}
 
 void Tourist::printHeader() const {
     cout << left;

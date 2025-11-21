@@ -29,6 +29,7 @@ public:
     const char* getAddress() const;
 
     Dealer& addDealer(int&);
+    virtual void updateFields(char) override;
     // virtual char editPunkt() override;
     // virtual Dealer& editPerson() override;
 

@@ -41,12 +41,12 @@ Dealer& Dealer::operator=(Dealer& dealer)
 
 bool Dealer::operator==(const Dealer& other) const
 {
-    return Person::operator==(other);
+    return this->Person::operator==(other);
 }
 
 bool Dealer::operator<(const Dealer& other) const
 {
-    return Person::operator<(other);
+    return this->Person::operator<(other);
 }
 
 void Dealer::setAddress(char* add)
@@ -177,6 +177,57 @@ Dealer& Dealer::addDealer(int& i)
 //     cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " | " << setw(28) << left << "License" << " | " << setw(10) << left << "Tax Sum" << " | " << setw(10) << left << "Tax Date" << " | " << setw(8) << left << "Passport" << " | " << setw(15) << left << "Country" << " | " << setw(10) << left << "Visit Date" << " | " << setw(37) << left << "Address" << " |" << endl;
 //     cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
 // }
+
+void Dealer::updateFields(char choiceField)
+{
+    char address[30];
+    
+    if(choiceField <= 5)
+    {
+        if(choiceField <= 2)
+        {
+            this->Person::updateFields(choiceField);
+        } else if(3 <= choiceField <= 5)
+        {
+            this->Employer::updateFields(choiceField); 
+        }
+        return;
+    }
+
+    switch(choiceField)
+    {
+        case 6:
+        {
+            cout << "New passport: ";
+            cin >> passport;
+            this->setPassport(passport);
+            break;
+        }
+        case 7:
+        {
+            cout << "New country name: ";
+            cin >> country.countryName;
+            country.time = this->getCountry().time;
+            this->setCountry(country);
+            break;   
+        }
+        case 8:
+        {
+            cout << "New visit date(DD MM YYYY): ";
+            cin >> country.time.day >> country.time.month >> country.time.year;
+            strcpy(country.countryName, this->getCountry().countryName);
+            this->setCountry(country);
+            break;   
+        }
+        case 9:
+        {
+            cout << "New address: ";
+            cin >> address;
+            this->setAddress(address);
+            break;   
+        }
+    }
+}
 
 void Dealer::printHeader() const {
     cout << left;

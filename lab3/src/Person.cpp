@@ -55,20 +55,48 @@ Data Person::getBirthday() const
     return this->birthday;
 }
 
+void Person::updateFields(char choiceField) 
+{
+    char name[30];
+    Data bd;
+    
+    switch(choiceField)
+    {
+        case 1:
+        {
+            cout << "New Name: ";
+            cin >> name;
+            this->setName(name);
+            break;
+        }
+        case 2:
+        {
+            cout << "New birthday(DD MM YYYY): ";
+            cin >> bd.day >> bd.month >> bd.year;
+            this->setBirthday(bd);
+            break;   
+        }
+    }
+}
+
 bool Person::operator==(const Person& other) const
 {
-    if (currentSearchMode == FULL_MATCH) {
+    if (currentSearchMode == FULL_MATCH) 
+    {
         return strcmp(name, other.name) == 0 &&
                birthday.day == other.birthday.day &&
                birthday.month == other.birthday.month &&
                birthday.year == other.birthday.year;
-    } else if (currentSearchMode == NAME) {
+    } else if (currentSearchMode == NAME) 
+    {
         return strcmp(name, other.name) == 0;
-    } else if (currentSearchMode == BIRTHDAY) {
+    } else if (currentSearchMode == BIRTHDAY)
+    {
         return birthday.day == other.birthday.day &&
                birthday.month == other.birthday.month &&
                birthday.year == other.birthday.year;
-    } else if (currentSearchMode == BIRTH_YEAR) {
+    } else if (currentSearchMode == BIRTH_YEAR) 
+    {
         return birthday.year == other.birthday.year;
     }
     return false;
@@ -76,17 +104,23 @@ bool Person::operator==(const Person& other) const
 
 bool Person::operator<(const Person& other) const
 {
-    if (currentSearchMode == NAME) {
+    if (currentSearchMode == NAME)
+    {
         return strcmp(name, other.name) < 0;
-    } else if (currentSearchMode == BIRTHDAY) {
-        if (birthday.year != other.birthday.year) {
+    } else if (currentSearchMode == BIRTHDAY)
+    {
+        if (birthday.year != other.birthday.year) 
+        {
             return birthday.year < other.birthday.year;
-        } else if (birthday.month != other.birthday.month) {
+        } else if (birthday.month != other.birthday.month)
+        {
             return birthday.month < other.birthday.month;
-        } else {
+        } else
+        {
             return birthday.day < other.birthday.day;
         }
-    } else if (currentSearchMode == BIRTH_YEAR) {
+    } else if (currentSearchMode == BIRTH_YEAR)
+    {
         return birthday.year < other.birthday.year;
     }
     return false;

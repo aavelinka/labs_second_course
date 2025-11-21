@@ -49,6 +49,7 @@ public:
     Taxes getTaxes() const;
 
     Employer& addEmployer(int&);
+    virtual void updateFields(char) override;
     // virtual char editPunkt() override;
     // virtual Employer& editPerson() override;
 

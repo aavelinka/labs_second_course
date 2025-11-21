@@ -65,6 +65,7 @@ public:
     const char* getName() const;
     void setBirthday(Data);
     Data getBirthday() const;
+    virtual void updateFields(char);
 
     virtual void printHeader() const = 0;
     virtual void printTable() const = 0;

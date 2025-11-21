@@ -38,12 +38,12 @@ Employer& Employer::operator=(Employer& employer)
 
 bool Employer::operator==(const Employer& other) const
 {
-    return Person::operator==(other);
+    return this->Person::operator==(other);
 }
 
 bool Employer::operator<(const Employer& other) const
 {
-    return Person::operator<(other);
+    return this->Person::operator<(other);
 }
 
 void Employer::setLicense(char* l)
@@ -149,6 +149,44 @@ Employer& Employer::addEmployer(int& i)
 //     cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " | " << setw(28) << left << "License" << " | " << setw(10) << left << "Tax Sum" << " | " << setw(10) << left << "Tax Date" << " |" << endl;
 //     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(31) << "" << "+" << setw(13) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
 // }
+
+void Employer::updateFields(char choiceField)
+{
+    char license[30];
+    Taxes tax;
+    if(choiceField <= 2)
+    {
+        this->Person::updateFields(choiceField);
+        return;
+    }
+
+    switch(choiceField)
+    {
+        case 3:
+        {
+            cout << "New license: ";
+            cin >> license;
+            this->setLicense(license);
+            break;
+        }
+        case 4:
+        {
+            cout << "New tax sum: ";
+            cin >> tax.sum;
+            tax.time = this->getTaxes().time;
+            this->setTaxes(tax);
+            break;   
+        }
+        case 5:
+        {
+            cout << "New tax date(DD MM YYYY): ";
+            cin >> tax.time.day >> tax.time.month >> tax.time.year;
+            tax.sum = this->getTaxes().sum;
+            this->setTaxes(tax);
+            break;   
+        }
+    }
+}
 
 void Employer::printHeader() const {
     cout << left;
