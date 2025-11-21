@@ -261,13 +261,8 @@ void searchDeque()
         return;
     }
     
-    cout << "------- Choose search mode -------" << endl;
-    cout << "| 1. Search by Name              |" << endl;
-    cout << "| 2. Search by Birthday          |" << endl;
-    cout << "| 3. Search by Birth Year        |" << endl;
-    cout << "| 4. Search by Full Match        |" << endl;
-    cout << "| 5. Exit                        |" << endl;
-    cout << "-----------------------------------" << endl;
+    string fieldOption[5] = {"1. Search by Name", "2. Search by Birthday", "3. Search by Birth Year", "4. Search by Full Match", "5. Exit"};
+    drawMenu("Choose search mode", fieldOption, 5);
     cout << "Choice: ";
     char choice;
     cin >> choice;
@@ -347,12 +342,8 @@ void sortDeque()
         return;
     }
     
-    cout << "------- Choose sort mode -------" << endl;
-    cout << "| 1. Sort by Name              |" << endl;
-    cout << "| 2. Sort by Birthday          |" << endl;
-    cout << "| 3. Sort by Birth Year       |" << endl;
-    cout << "| 4. Exit                     |" << endl;
-    cout << "--------------------------------" << endl;
+    string fieldOption[4] = {"1. Sort by Name", "2. Sort by Birthday", "3. Sort by Birth Year", "4. Exit"};
+    drawMenu("Choose sort mode", fieldOption, 4);
     cout << "Choice: ";
     char choice;
     cin >> choice;
@@ -379,7 +370,6 @@ void sortDeque()
     }
     
     myDeque.sort();
-    
     cout << "Deque sorted successfully." << endl;
     if(!myDeque.isEmpty())
     {
