@@ -1,0 +1,57 @@
+#pragma once
+
+#include "Person.h"
+#include<iomanip>
+
+struct Taxes
+{
+    Date time;
+    double sum;
+};
+
+class Employer : virtual public Person
+{
+protected:
+    string license;
+    Taxes taxe;
+
+public:
+    Employer() : Person()
+    {
+        this->license = " - ";
+        this->taxe.sum = 0.0;
+        this->taxe.time = Date(1, 1, 1999);
+    }
+    Employer(string n, Date data, string l, Taxes t) : Person(n, data)
+    {
+        this->license = l;
+        this->taxe.sum = t.sum;
+        this->taxe.time = t.time;
+    }
+    Employer(const Employer& employer) : Person(employer.name, employer.birthday)
+    {
+        this->license = employer.license;
+        this->taxe.sum = employer.taxe.sum;
+        this->taxe.time = employer.taxe.time;
+    }
+    ~Employer() { }
+
+    friend ostream& operator<<(ostream&, Employer&);
+    friend istream& operator>>(istream&, Employer&);
+    Employer& operator=(Employer&);
+    bool operator==(const Employer& other) const;
+    bool operator<(const Employer& other) const;
+    void setLicense(string);
+    string getLicense() const;
+    void setTaxes(Taxes);
+    Taxes getTaxes() const;
+
+    Employer& addEmployer(int&);
+    virtual void updateFields(int) override;
+    // virtual char editPunkt() override;
+    // virtual Employer& editPerson() override;
+
+    virtual void printHeader() const override;
+    virtual void printTable() const override;
+
+};
