@@ -7,7 +7,7 @@ using namespace std;
 
 template<typename T> class Deque;
 
-typedef struct Data 
+struct Data 
 {
     int day;
     int month;
@@ -65,7 +65,7 @@ public:
     const char* getName() const;
     void setBirthday(Data);
     Data getBirthday() const;
-    virtual void updateFields(char);
+    virtual void updateFields(int);
 
     virtual void printHeader() const = 0;
     virtual void printTable() const = 0;

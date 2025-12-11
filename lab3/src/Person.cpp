@@ -55,7 +55,7 @@ Data Person::getBirthday() const
     return this->birthday;
 }
 
-void Person::updateFields(char choiceField) 
+void Person::updateFields(int choiceField) 
 {
     char name[30];
     Data bd;

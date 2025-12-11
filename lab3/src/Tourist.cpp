@@ -147,7 +147,7 @@ Tourist& Tourist::addTourist(int& i)
 //     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(11) << "" << "+" << setw(18) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
 // }
 
-void Tourist::updateFields(char choiceField)
+void Tourist::updateFields(int choiceField)
 {
     char passport[8];
     Countries country;
@@ -188,7 +188,7 @@ void Tourist::updateFields(char choiceField)
 
 void Tourist::printHeader() const {
     cout << left;
-    cout << "| " << setw(4) << "Name" << " | " << setw(12) << "Birthday" << " | " << setw(7) << "License" << " | " << setw(7) << "Tax Sum" << " | " << setw(12) << "Tax Date" << " | " << setw(8) << "Passport" << " | " << setw(7) << "Country" << " | " << setw(12) << "Visit Date" << " | " << setw(7) << "Address" << " |" << endl;
+    cout << "| " << setw(12) << "Name" << " | " << setw(12) << "Birthday" << " | " << setw(7) << "License" << " | " << setw(7) << "Tax Sum" << " | " << setw(12) << "Tax Date" << " | " << setw(8) << "Passport" << " | " << setw(7) << "Country" << " | " << setw(12) << "Visit Date" << " | " << setw(7) << "Address" << " |" << endl;
 }
 
 void Tourist::printTable() const {
@@ -197,5 +197,5 @@ void Tourist::printTable() const {
     sprintf(visitDateStr, "%02d.%02d.%04d", country.time.day, country.time.month, country.time.year);
     
     cout << left;
-    cout << "| " << setw(4) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << " - " << " |" << endl;
+    cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << " - " << " |" << endl;
 }

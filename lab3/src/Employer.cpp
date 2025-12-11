@@ -150,7 +150,7 @@ Employer& Employer::addEmployer(int& i)
 //     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(31) << "" << "+" << setw(13) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
 // }
 
-void Employer::updateFields(char choiceField)
+void Employer::updateFields(int choiceField)
 {
     char license[30];
     Taxes tax;
@@ -190,7 +190,7 @@ void Employer::updateFields(char choiceField)
 
 void Employer::printHeader() const {
     cout << left;
-    cout << "| " << setw(4) << "Name" << " | " << setw(12) << "Birthday" << " | " << setw(7) << "License" << " | " << setw(7) << "Tax Sum" << " | " << setw(12) << "Tax Date" << " | " << setw(8) << "Passport" << " | " << setw(7) << "Country" << " | " << setw(12) << "Visit Date" << " | " << setw(7) << "Address" << " |" << endl;
+    cout << "| " << setw(12) << "Name" << " | " << setw(12) << "Birthday" << " | " << setw(7) << "License" << " | " << setw(7) << "Tax Sum" << " | " << setw(12) << "Tax Date" << " | " << setw(8) << "Passport" << " | " << setw(7) << "Country" << " | " << setw(12) << "Visit Date" << " | " << setw(7) << "Address" << " |" << endl;
 }
 
 void Employer::printTable() const {
@@ -201,5 +201,5 @@ void Employer::printTable() const {
     sprintf(taxSumStr, "%.2f", taxe.sum);
     
     cout << left;
-    cout << "| " << setw(4) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(7) << " - " << " |" << endl;
+    cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(7) << " - " << " |" << endl;
 }

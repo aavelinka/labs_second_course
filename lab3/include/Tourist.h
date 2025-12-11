@@ -3,7 +3,7 @@
 #include "Person.h"
 #include<iomanip>
 
-typedef struct Countries
+struct Countries
 {
     Data time;
     char countryName[15];
@@ -43,7 +43,7 @@ public:
     Countries getCountry() const;
 
     Tourist& addTourist(int&);
-    virtual void updateFields(char) override;
+    virtual void updateFields(int) override;
     // virtual char editPunkt() override;
     // virtual Tourist& editPerson() override;
 

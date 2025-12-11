@@ -3,7 +3,7 @@
 #include "Person.h"
 #include<iomanip>
 
-typedef struct Taxes
+struct Taxes
 {
     Data time;
     double sum;
@@ -49,7 +49,7 @@ public:
     Taxes getTaxes() const;
 
     Employer& addEmployer(int&);
-    virtual void updateFields(char) override;
+    virtual void updateFields(int) override;
     // virtual char editPunkt() override;
     // virtual Employer& editPerson() override;
 
