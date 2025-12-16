@@ -1,4 +1,5 @@
 #include "Employer.h"
+#include "../Algorithm.h"
 #include <cstdio>
 
 ostream& operator<<(ostream& out, Employer& employer)
@@ -203,3 +204,15 @@ void Employer::printTable() const {
     cout << left;
     cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(7) << " - " << " |" << endl;
 }
+
+void Employer::fieldBy(){
+    static const string employerOptions[5] = {
+        "1. Name",
+        "2. Birthday",
+        "3. License",
+        "4. Tax Sum",
+        "5. Tax Date"
+    };
+    drawMenu("Fields", employerOptions, 5);
+}
+

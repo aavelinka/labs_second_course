@@ -1,4 +1,5 @@
 #include "Tourist.h"
+#include "../Algorithm.h"
 #include <cstdio>
 
 ostream& operator<<(ostream& out, Tourist& tourist)
@@ -198,4 +199,15 @@ void Tourist::printTable() const {
     
     cout << left;
     cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << " - " << " |" << endl;
+}
+
+void Tourist::fieldBy(){
+    static const string touristOptions[5] = {
+        "1. Name",
+        "2. Birthday",
+        "3. Passport",
+        "4. Country Name",
+        "5. Visit Date"
+    };
+    drawMenu("Fields", touristOptions, 5);
 }

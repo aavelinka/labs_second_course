@@ -3,30 +3,12 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include "include/Person.h"
-#include "include/Employer.h"
-#include "include/Tourist.h"
 #include "include/Dealer.h"
 #include "include/Deque.tpp"
 
 using namespace std;
 
-void drawMenu(const string& title, const string options[], int numOptions) {
-    int maxLen = static_cast<int>(title.length());
-    for (int i = 0; i < numOptions; i++) {
-        if (static_cast<int>(options[i].length()) > maxLen) {
-            maxLen = static_cast<int>(options[i].length());
-        }
-    }
-    maxLen += 4;
-    cout << "+" << string(maxLen, '-') << "+" << endl;
-    cout << "| " << title << string(maxLen - static_cast<int>(title.length()) - 1, ' ') << "|" << endl;
-    cout << "+" << string(maxLen, '-') << "+" << endl;
-    for (int i = 0; i < numOptions; i++) {
-        cout << "| " << options[i] << string(maxLen - static_cast<int>(options[i].length()) - 1, ' ') << "|" << endl;
-    }
-    cout << "+" << string(maxLen, '-') << "+" << endl;
-}
+void drawMenu(const string& title, const string options[], int numOptions);
 
 template <typename T>
 void addObject(Deque<Person*>& deque) {
@@ -66,106 +48,12 @@ void removeObject(Deque<Person*>& deque) {
     cin >> choice;
 
     Person* removed = nullptr;
-    if (choice == 1) {
-        removed = deque.popFront();
-    } else if (choice == 2) {
-        removed = deque.popBack();
-    } else {
-        cout << "Invalid choice." << endl;
-    }
+    removed = (choice == 1) ? deque.popFront() : deque.popBack();
 
     delete removed;
 }
 
-void modifyObject(Deque<Person*>& deque) {
-    if (deque.isEmpty()) {
-        cout << "Deque is empty." << endl;
-        return;
-    }
-
-    const string sideOptions[2] = {"1. Modify First", "2. Modify Last"};
-    drawMenu("Select Object to Modify", sideOptions, 2);
-    cout << "Choice: ";
-    int sideChoice;
-    cin >> sideChoice;
-
-    Person* person = (sideChoice == 1) ? deque.peekFirst() : deque.peekLast();
-    if (person == nullptr) {
-        cout << "Selected element is null." << endl;
-        return;
-    }
-
-    Dealer* dealer = dynamic_cast<Dealer*>(person);
-    Employer* employer = dealer ? nullptr : dynamic_cast<Employer*>(person);
-    Tourist* tourist = dealer ? nullptr : dynamic_cast<Tourist*>(person);
-
-    const string* options = nullptr;
-    int optionsCount = 0;
-    if (dealer) {
-        static const string dealerOptions[9] = {
-            "1. Name",
-            "2. Birthday",
-            "3. License",
-            "4. Tax Sum",
-            "5. Tax Date",
-            "6. Passport",
-            "7. Country Name",
-            "8. Visit Date",
-            "9. Address"
-        };
-        options = dealerOptions;
-        optionsCount = 9;
-    } else if (employer) {
-        static const string employerOptions[5] = {
-            "1. Name",
-            "2. Birthday",
-            "3. License",
-            "4. Tax Sum",
-            "5. Tax Date"
-        };
-        options = employerOptions;
-        optionsCount = 5;
-    } else if (tourist) {
-        static const string touristOptions[5] = {
-            "1. Name",
-            "2. Birthday",
-            "3. Passport",
-            "4. Country Name",
-            "5. Visit Date"
-        };
-        options = touristOptions;
-        optionsCount = 5;
-    } else {
-        cout << "Unknown object type." << endl;
-        return;
-    }
-
-    drawMenu("Select Field", options, optionsCount);
-    cout << "Choice: ";
-    int fieldChoice;
-    cin >> fieldChoice;
-
-    if (fieldChoice < 1 || fieldChoice > optionsCount) {
-        cout << "Invalid field." << endl;
-        return;
-    }
-
-    if (dealer) {
-        Dealer copy = *dealer;
-        copy.updateFields(fieldChoice);
-        *dealer = copy;
-    } else if (employer) {
-        Employer copy = *employer;
-        copy.updateFields(fieldChoice);
-        *employer = copy;
-    } else if (tourist) {
-        Tourist copy = *tourist;
-        copy.updateFields(fieldChoice);
-        *tourist = copy;
-    }
-
-    cout << "Field updated successfully." << endl;
-}
+void modifyObject(Deque<Person*>& deque);
 
 template <typename T>
 void peekObject(Deque<Person*>& deque) {
@@ -181,14 +69,7 @@ void peekObject(Deque<Person*>& deque) {
     cin >> choice;
 
     Person* obj = nullptr;
-    if (choice == 1) {
-        obj = deque.peekFirst();
-    } else if (choice == 2) {
-        obj = deque.peekLast();
-    } else {
-        cout << "Invalid choice." << endl;
-        return;
-    }
+    obj = (choice == 1) ? deque.peekFirst() : deque.peekLast();
 
     if (obj != nullptr) {
         obj->printHeader();
@@ -373,30 +254,5 @@ void runForType(const string& typeName) {
     clearDeque<T>(myDeque);
 }
 
-void run() {
-    int choice;
-    do
-    {
-        const string typeOptions[3] = {
-            "1. Employer",
-            "2. Tourist",
-            "3. Dealer"
-        };
-        drawMenu("Select type to work with", typeOptions, 3);
-        cout << "Choice: ";
-        int typeChoice;
-        cin >> typeChoice;
-    
-        switch (typeChoice) {
-            case 1: runForType<Employer>("Employer"); break;
-            case 2: runForType<Tourist>("Tourist"); break;
-            case 3: runForType<Dealer>("Dealer"); break;
-            default: cout << "Invalid choice." << endl; break;
-        }
+void run();
 
-        cout << "Do you want to repeate?(y - 1, n - 0)" << endl;
-        cout << "Choice: ";
-        cin >> choice;
-
-    } while(choice == 1);
-}

@@ -1,4 +1,5 @@
 #include "Person.h"
+#include "../Algorithm.h"
 
 SearchMode Person::currentSearchMode = FULL_MATCH;
 
@@ -124,4 +125,13 @@ bool Person::operator<(const Person& other) const
         return birthday.year < other.birthday.year;
     }
     return false;
+}
+
+void Person::fieldBy()
+{
+    static const string personOptions[2] = {
+        "1. Name",
+        "2. Birthday",
+    };
+    drawMenu("Fields", personOptions, 2);
 }

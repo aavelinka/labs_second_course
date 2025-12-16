@@ -1,4 +1,5 @@
 #include "Dealer.h"
+#include "../Algorithm.h"
 #include <cstdio>
 
 ostream& operator<<(ostream& out, Dealer& dealer)
@@ -244,4 +245,19 @@ void Dealer::printTable() const {
     
     cout << left;
     cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << address << " |" << endl;
+}
+
+void Dealer::fieldBy(){
+    static const string dealerOptions[9] = {
+        "1. Name",
+        "2. Birthday",
+        "3. License",
+        "4. Tax Sum",
+        "5. Tax Date",
+        "6. Passport",
+        "7. Country Name",
+        "8. Visit Date",
+        "9. Address"
+    };
+    drawMenu("Fields", dealerOptions, 9);
 }

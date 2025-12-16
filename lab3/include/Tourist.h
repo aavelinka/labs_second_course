@@ -43,6 +43,7 @@ public:
     Countries getCountry() const;
 
     Tourist& addTourist(int&);
+    virtual void fieldBy() override;
     virtual void updateFields(int) override;
     // virtual char editPunkt() override;
     // virtual Tourist& editPerson() override;

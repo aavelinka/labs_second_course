@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 include_directories(include)
 
 set(SOURCES
+    Algorithm.cpp
     Algorithm.h
     src/Person.cpp
     src/Employer.cpp
