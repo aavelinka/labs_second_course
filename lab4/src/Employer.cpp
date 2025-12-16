@@ -117,7 +117,7 @@ void Employer::updateFields(int choiceField)
 
 void Employer::printHeader() const {
     cout << left;
-    cout << "| " << setw(4) << "Имя" << " | " << setw(12) << "Дата рождения" << " | " << setw(7) << "Лицензия" << " | " << setw(7) << "Сумма налога" << " | " << setw(12) << "Дата налога" << " | " << setw(8) << "Паспорт" << " | " << setw(7) << "Страна" << " | " << setw(12) << "Дата визита" << " | " << setw(7) << "Адресс" << " |" << endl;
+    cout << "| " << setw(12) << "Имя" << " | " << setw(12) << "Дата рождения" << " | " << setw(7) << "Лицензия" << " | " << setw(7) << "Сумма налога" << " | " << setw(12) << "Дата налога" << " | " << setw(8) << "Паспорт" << " | " << setw(7) << "Страна" << " | " << setw(12) << "Дата визита" << " | " << setw(7) << "Адресс" << " |" << endl;
 }
 
 void Employer::printTable() const {
@@ -128,5 +128,5 @@ void Employer::printTable() const {
     sprintf(taxSumStr, "%.2f", taxe.sum);
     
     cout << left;
-    cout << "| " << setw(4) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(7) << " - " << " |" << endl;
+    cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(7) << " - " << " |" << endl;
 }

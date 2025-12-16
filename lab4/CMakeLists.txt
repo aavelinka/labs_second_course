@@ -15,6 +15,7 @@ set(SOURCES
 )
 
 set(HEADERS
+    algoritm/Algorithm.h
     exceptions/include/Exception.h
     exceptions/include/InputException.h
     exceptions/include/InputValidator.h

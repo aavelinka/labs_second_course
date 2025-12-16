@@ -18,7 +18,7 @@ istream& operator>>(istream& in, Dealer& dealer)
     dealer.passport = getValidPassword(in);
     cout << "Введие страну(название и дата): " << endl;
     cout << "Имя страны - ";
-    dealer.country.countryName = safeGetline(in, true);
+    dealer.country.countryName = isUpp(in, true);
     cout << "Дата (YYYY-MM-DD) - ";
     dealer.country.time = readDate(in);
     cout << "Введите адресс: ";
@@ -122,7 +122,7 @@ void Dealer::updateFields(int choiceField)
 
 void Dealer::printHeader() const {
     cout << left;
-    cout << "| " << setw(4) << "Имя" << " | " << setw(12) << "Дата рождения" << " | " << setw(7) << "Лицензия" << " | " << setw(7) << "Сумма налога" << " | " << setw(12) << "Дата налога" << " | " << setw(8) << "Паспорт" << " | " << setw(7) << "Страна" << " | " << setw(12) << "Дата визита" << " | " << setw(7) << "Адресс" << " |" << endl;
+    cout << "| " << setw(12) << "Имя" << " | " << setw(12) << "Дата рождения" << " | " << setw(7) << "Лицензия" << " | " << setw(7) << "Сумма налога" << " | " << setw(12) << "Дата налога" << " | " << setw(8) << "Паспорт" << " | " << setw(7) << "Страна" << " | " << setw(12) << "Дата визита" << " | " << setw(7) << "Адресс" << " |" << endl;
 }
 
 void Dealer::printTable() const {
@@ -134,5 +134,5 @@ void Dealer::printTable() const {
     sprintf(taxSumStr, "%.2f", taxe.sum);
     
     cout << left;
-    cout << "| " << setw(4) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << address << " |" << endl;
+    cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << address << " |" << endl;
 }

@@ -68,6 +68,29 @@ string safeGetline(istream& is, bool isRussian) {
     return input;
 }
 
+string isUpp(istream& is, bool isRussian)
+{
+    do
+    {
+        try
+        {
+            string nameProo = safeGetline(is, isRussian);
+            unsigned char c1 = nameProo[0];
+            unsigned char c2 = nameProo[1];
+            if((c1 == 0xD0 && (c2 >= 0x90 && c2 <= 0x9F)) || // А–П
+               (c1 == 0xD0 && c2 == 0x81))
+            {
+                return nameProo;
+            }
+            throw InputException(8, "Недопустимый ввод. Слово должно начинаться с большой буквы. Got: " + nameProo);
+        }
+        catch(const InputException& e)
+        {
+            cout << "Ошибка: " << e.what() << "\n";
+        }
+    } while (true);
+}
+
 bool isEnglishOnly(const string& str) {
     if (str.empty()) return false;
     for (char c : str) {
@@ -90,7 +113,6 @@ bool isRussianOnly(const string& str) {
             }
             if (!isspace(c) && c != '-') {
             }
-        } else {
         }
     }
     return true;

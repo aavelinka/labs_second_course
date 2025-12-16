@@ -17,7 +17,7 @@ istream& operator>>(istream& in, Tourist& tourist)
     tourist.passport = getValidPassword(in);
     cout << "Введите страну(название и дату): " << endl;
     cout << "Название страны(на русском): "; 
-    tourist.country.countryName = safeGetline(in, true);
+    tourist.country.countryName = isUpp(in, true);
     cout << "Дата (YYYY-MM-DD): ";
     tourist.country.time = readDate(in);
 
@@ -117,7 +117,7 @@ void Tourist::updateFields(int choiceField)
 
 void Tourist::printHeader() const {
     cout << left;
-    cout << "| " << setw(4) << "Имя" << " | " << setw(12) << "Дата рождения" << " | " << setw(7) << "Лицензия" << " | " << setw(7) << "Налог" << " | " << setw(12) << "Дата налога" << " | " << setw(8) << "Пароль" << " | " << setw(7) << "Страна" << " | " << setw(12) << "Дата визита" << " | " << setw(7) << "Адресс" << " |" << endl;
+    cout << "| " << setw(12) << "Имя" << " | " << setw(12) << "Дата рождения" << " | " << setw(7) << "Лицензия" << " | " << setw(7) << "Налог" << " | " << setw(12) << "Дата налога" << " | " << setw(8) << "Пароль" << " | " << setw(7) << "Страна" << " | " << setw(12) << "Дата визита" << " | " << setw(7) << "Адресс" << " |" << endl;
 }
 
 void Tourist::printTable() const {
@@ -126,5 +126,5 @@ void Tourist::printTable() const {
     sprintf(visitDateStr, "%02d.%02d.%04d", country.time.day, country.time.month, country.time.year);
     
     cout << left;
-    cout << "| " << setw(4) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << " - " << " |" << endl;
+    cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << " - " << " |" << endl;
 }

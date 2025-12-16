@@ -15,8 +15,7 @@ T getValidNumericValue(istream& stream, T min, T max)
 {
     T value;
     string line;
-    bool success = false;
-    do
+    while(true)
     {
         try
         {
@@ -35,7 +34,6 @@ T getValidNumericValue(istream& stream, T min, T max)
             {
                 if (value >= min && value <= max)
                 {
-                    success = true;
                     return value;
                 }
                 else
@@ -53,10 +51,8 @@ T getValidNumericValue(istream& stream, T min, T max)
         catch (const InputException& e)
         {
             cout << "Error: " << e.what() << "\n";
-            success = false;
         }
-    } while (!success);
-    return value;
+    }
 }
 
 string safeGetline(istream& is, bool isRussianOnly);
@@ -64,5 +60,6 @@ string getValidPassword(istream& stream);
 Date readDate(istream& stream);
 bool isRussianOnly(const string& str);
 bool isEnglishOnly(const string& str);
+string isUpp(istream& is, bool isRussian);
 
 #endif

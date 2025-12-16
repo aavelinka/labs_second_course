@@ -50,7 +50,7 @@ ostream& operator<<(ostream& out, Person& person)
 istream& operator>>(istream& in, Person& person)
 {
     cout << "Введите имя(на русском): " ;
-    person.name = safeGetline(in, true);
+    person.name = isUpp(in, true);
     cout << "Введите дату рождения(YYYY-MM-DD): ";
     person.birthday = readDate(in);
 
