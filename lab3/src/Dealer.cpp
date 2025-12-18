@@ -20,7 +20,7 @@ istream& operator>>(istream& in, Dealer& dealer)
     cout << "Enter country(name and time): " << endl;
     cout << "Name of country - ";
     in >> dealer.country.countryName;
-    cout << "Time(XX.YY.ZZZZ) - ";
+    cout << "Time(XX YY ZZZZ) - ";
     in >> dealer.country.time.day >> dealer.country.time.month >> dealer.country.time.year;
     cout << "Enter address: ";
     in >> dealer.address;
