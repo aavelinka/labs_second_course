@@ -7,6 +7,8 @@ include_directories(include)
 
 set(SOURCES
     exceptions/src/InputValidator.cpp
+    Algorithm.cpp
+    Algorithm.h
     src/Person.cpp
     src/Employer.cpp
     src/Tourist.cpp
@@ -15,7 +17,6 @@ set(SOURCES
 )
 
 set(HEADERS
-    algoritm/Algorithm.h
     exceptions/include/Exception.h
     exceptions/include/InputException.h
     exceptions/include/InputValidator.h

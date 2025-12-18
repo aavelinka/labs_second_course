@@ -1,5 +1,5 @@
 #include "Employer.h"
-#include "../exceptions/include/InputValidator.h"
+#include "../Algorithm.h"
 #include <cstdio>
 
 ostream& operator<<(ostream& out, Employer& employer)
@@ -13,13 +13,13 @@ ostream& operator<<(ostream& out, Employer& employer)
 istream& operator>>(istream& in, Employer& employer)
 {
     in >> static_cast<Person&>(employer);
-    cout << "Введите лицензию: ";
+    cout << "Введите лицензию(на русском): ";
     employer.license = getValidPassword(cin);
-    cout << "Введите налог(сумма и дата): " << endl;
+    cout << "Введите налог(сумма и дремя): " << endl;
     cout << "Сумма - ";
-    employer.taxe.sum = getValidNumericValue(cin, 0, 10000);
-    cout << "Дата(YYYY-MM-DD) - ";
-    employer.taxe.time = readDate(cin);
+    employer.taxe.sum = getValidNumericValue(in, 0, 10000);
+    cout << "Время(YYYY-MM-DD) - ";
+    employer.taxe.time = readDate(in);
 
     return in;
 }
@@ -77,6 +77,79 @@ Employer& Employer::addEmployer(int& i)
     return *this;
 }
 
+// char Employer::editPunkt()
+// {
+//     cout << "-------------------------" << endl;
+//     cout << "| 1. Edit name          |" << endl;
+//     cout << "| 2. Edit birthday      |" << endl;
+//     cout << "| 3. Edit license       |" << endl;
+//     cout << "| 4. Edit taxe          |" << endl;
+//     cout << "| 5. Edit all           |" << endl;
+//     cout << "-------------------------" << endl;
+
+
+//     char option;
+//     cin >> option;
+
+//     return option;
+// }
+
+// Employer& Employer::editPerson()
+// {
+//     switch (editPunkt())
+//     {
+//     case '1':
+//     {
+//         char newName[30];
+//         cout << "Enter new name: ";
+//         cin >> newName;
+//         this->setName(newName);
+//         break;
+//     }
+//     case '2':
+//     {
+//         Data newBirthday;
+//         cout << "Enter new birthday(XX.YY.ZZZZ): ";
+//         cin >> newBirthday.day >> newBirthday.month >> newBirthday.year;
+//         this->setBirthday(newBirthday);
+//         break;
+//     }
+//     case '3':
+//     {
+//         char newLicense[30];
+//         cout << "Enter new license: ";
+//         cin >> newLicense;
+//         this->setLicense(newLicense);
+//         break;
+//     }
+//     case '4':
+//     {
+//         Taxes newTaxe;
+//         cout << "Enter new taxe:\nSumm - ";
+//         cin >> newTaxe.sum;
+//         cout << "Time(XX.YY.ZZZZ) - ";
+//         cin >> newTaxe.time.day >> newTaxe.time.month >> newTaxe.time.year;
+//         this->setTaxes(newTaxe);
+//         break;
+//     } 
+//     case '5':
+//     {
+//         Employer newEmployer;
+//         cin >> newEmployer;
+//         *this = newEmployer;
+//         break;
+//     }
+//     }
+
+//     return *this;
+// }
+
+// void Employer::printHeader() {
+//     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(31) << "" << "+" << setw(13) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
+//     cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " | " << setw(28) << left << "License" << " | " << setw(10) << left << "Tax Sum" << " | " << setw(10) << left << "Tax Date" << " |" << endl;
+//     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(31) << "" << "+" << setw(13) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
+// }
+
 void Employer::updateFields(int choiceField)
 {
     string license;
@@ -106,8 +179,8 @@ void Employer::updateFields(int choiceField)
         }
         case 5:
         {
-            cout << "Новая дата налога (YYYY-MM-DD): ";
-            cin >> tax.time.day >> tax.time.month >> tax.time.year;
+            cout << "Новая дата налога(YYYY-MM-DD): ";
+            tax.time = readDate(cin);
             tax.sum = this->getTaxes().sum;
             this->setTaxes(tax);
             break;   
@@ -117,7 +190,7 @@ void Employer::updateFields(int choiceField)
 
 void Employer::printHeader() const {
     cout << left;
-    cout << "| " << setw(12) << "Имя" << " | " << setw(12) << "Дата рождения" << " | " << setw(7) << "Лицензия" << " | " << setw(7) << "Сумма налога" << " | " << setw(12) << "Дата налога" << " | " << setw(8) << "Паспорт" << " | " << setw(7) << "Страна" << " | " << setw(12) << "Дата визита" << " | " << setw(7) << "Адресс" << " |" << endl;
+    cout << "| " << setw(12) << "Name" << " | " << setw(12) << "Birthday" << " | " << setw(7) << "License" << " | " << setw(7) << "Tax Sum" << " | " << setw(12) << "Tax Date" << " | " << setw(8) << "Passport" << " | " << setw(7) << "Country" << " | " << setw(12) << "Visit Date" << " | " << setw(7) << "Address" << " |" << endl;
 }
 
 void Employer::printTable() const {
@@ -130,3 +203,15 @@ void Employer::printTable() const {
     cout << left;
     cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(7) << " - " << " |" << endl;
 }
+
+void Employer::fieldBy(){
+    static const string employerOptions[5] = {
+        "1. Имя",
+        "2. День рождения",
+        "3. Лицензия",
+        "4. Сумма налога",
+        "5. Дата налога"
+    };
+    drawMenu("Поля", employerOptions, 5);
+}
+

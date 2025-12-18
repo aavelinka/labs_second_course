@@ -1,5 +1,5 @@
 #include "Tourist.h"
-#include "../exceptions/include/InputValidator.h"
+#include "../Algorithm.h"
 #include <cstdio>
 
 ostream& operator<<(ostream& out, Tourist& tourist)
@@ -15,10 +15,10 @@ istream& operator>>(istream& in, Tourist& tourist)
     in >> static_cast<Person&>(tourist);
     cout << "Введите номер паспорта: ";
     tourist.passport = getValidPassword(in);
-    cout << "Введите страну(название и дату): " << endl;
-    cout << "Название страны(на русском): "; 
-    tourist.country.countryName = isUpp(in, true);
-    cout << "Дата (YYYY-MM-DD): ";
+    cout << "Введите данные для страны(имя и дата): " << endl;
+    cout << "Имя страны - "; 
+    tourist.country.countryName;
+    cout << "Дата (YYYY-MM-DD) - ";
     tourist.country.time = readDate(in);
 
     return in;
@@ -59,6 +59,7 @@ string Tourist::getPassport() const
 void Tourist::setCountry(Countries c)
 {
     this->country = c;
+    // strcpy(this->country.countryName, c.countryName);
 }
 
 Countries Tourist::getCountry() const
@@ -75,6 +76,76 @@ Tourist& Tourist::addTourist(int& i)
 
     return *this;
 }
+
+// char Tourist::editPunkt()
+// {
+//     cout << "-------------------------" << endl;
+//     cout << "| 1. Edit name          |" << endl;
+//     cout << "| 2. Edit birthday      |" << endl;
+//     cout << "| 3. Edit passport      |" << endl;
+//     cout << "| 4. Edit country       |" << endl;
+//     cout << "| 5. Edit all           |" << endl;
+//     cout << "-------------------------" << endl;
+//     char option;
+//     cin >> option;
+//     return option;
+// }
+
+// Tourist& Tourist::editPerson()
+// {
+//     switch (editPunkt())
+//     {
+//     case '1':
+//     {
+//         char newName[30];
+//         cout << "Enter new name: ";
+//         cin >> newName;
+//         this->setName(newName);
+//         break;
+//     }
+//     case '2':
+//     {
+//         Data newBirthday;
+//         cout << "Enter new birthday(XX.YY.ZZZZ): ";
+//         cin >> newBirthday.day >> newBirthday.month >> newBirthday.year;
+//         this->setBirthday(newBirthday);
+//         break;
+//     }
+//     case '3':
+//     {
+//         char newPassport[8];
+//         cout << "Enter new data to passport: ";
+//         cin >> newPassport;
+//         this->setPassport(newPassport);
+//         break;
+//     }
+//     case '4':
+//     {
+//         Countries newCountry;
+//         cout << "Enter new country(name and time): " << endl;
+//         cout << "Name of country - ";
+//         cin >> newCountry.countryName;
+//         cout << "Time(XX.YY.ZZZZ) - ";
+//         cin >> newCountry.time.day >> newCountry.time.month >> newCountry.time.year;
+//         this->setCountry(newCountry);
+//         break;
+//     }
+//     case '5':
+//     {
+//         Tourist newTourist;
+//         cin >> newTourist;
+//         *this = newTourist;
+//         break;
+//     }
+//     }
+//     return *this;
+// }
+
+// void Tourist::printHeader() {
+//     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(11) << "" << "+" << setw(18) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
+//     cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " | " << setw(8) << left << "Passport" << " | " << setw(15) << left << "Country" << " | " << setw(10) << left << "Visit Date" << " |" << endl;
+//     cout << "+" << setw(31) << setfill('-') << "" << "+" << setw(13) << "" << "+" << setw(11) << "" << "+" << setw(18) << "" << "+" << setw(13) << "" << "+" << setfill(' ') << endl;
+// }
 
 void Tourist::updateFields(int choiceField)
 {
@@ -98,8 +169,8 @@ void Tourist::updateFields(int choiceField)
         }
         case 4:
         {
-            cout << "Новое название страны: ";
-            country.countryName = safeGetline(cin, true);
+            cout << "Новое имя страны: ";
+            country.countryName = isUpp(cin, true);
             country.time = this->getCountry().time;
             this->setCountry(country);
             break;   
@@ -117,7 +188,7 @@ void Tourist::updateFields(int choiceField)
 
 void Tourist::printHeader() const {
     cout << left;
-    cout << "| " << setw(12) << "Имя" << " | " << setw(12) << "Дата рождения" << " | " << setw(7) << "Лицензия" << " | " << setw(7) << "Налог" << " | " << setw(12) << "Дата налога" << " | " << setw(8) << "Пароль" << " | " << setw(7) << "Страна" << " | " << setw(12) << "Дата визита" << " | " << setw(7) << "Адресс" << " |" << endl;
+    cout << "| " << setw(12) << "Name" << " | " << setw(12) << "Birthday" << " | " << setw(7) << "License" << " | " << setw(7) << "Tax Sum" << " | " << setw(12) << "Tax Date" << " | " << setw(8) << "Passport" << " | " << setw(7) << "Country" << " | " << setw(12) << "Visit Date" << " | " << setw(7) << "Address" << " |" << endl;
 }
 
 void Tourist::printTable() const {
@@ -127,4 +198,15 @@ void Tourist::printTable() const {
     
     cout << left;
     cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << " - " << " | " << setw(7) << " - " << " | " << setw(12) << " - " << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << " - " << " |" << endl;
+}
+
+void Tourist::fieldBy(){
+    static const string touristOptions[5] = {
+        "1. Имя",
+        "2. День рождения",
+        "3. Паспорт",
+        "4. Имя страны",
+        "5. Дата посещения"
+    };
+    drawMenu("Поля", touristOptions, 5);
 }

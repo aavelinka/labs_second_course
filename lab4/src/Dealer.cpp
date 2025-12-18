@@ -1,5 +1,5 @@
 #include "Dealer.h"
-#include "../exceptions/include/InputValidator.h"
+#include "../Algorithm.h"
 #include <cstdio>
 
 ostream& operator<<(ostream& out, Dealer& dealer)
@@ -14,15 +14,15 @@ ostream& operator<<(ostream& out, Dealer& dealer)
 istream& operator>>(istream& in, Dealer& dealer)
 {
     in >> static_cast<Employer&>(dealer);
-    cout << "Введиет номер паспорта: ";
+    cout << "Введите пасспорт: ";
     dealer.passport = getValidPassword(in);
-    cout << "Введие страну(название и дата): " << endl;
+    cout << "Введите страну(имя и даты): " << endl;
     cout << "Имя страны - ";
     dealer.country.countryName = isUpp(in, true);
-    cout << "Дата (YYYY-MM-DD) - ";
+    cout << "Дата(YYYY-MM-DD) - ";
     dealer.country.time = readDate(in);
     cout << "Введите адресс: ";
-    dealer.address = safeGetline(in, true);
+    dealer.address = isUpp(in, true);
 
     return in;
 }
@@ -62,12 +62,121 @@ string Dealer::getAddress() const
 Dealer& Dealer::addDealer(int& i)
 {
     Dealer dealer;
-    cout << (i + 1) << ". Добавить дилера: " << endl;
+    cout << (i + 1) << ". Add dealer: " << endl;
     cin >> dealer;
     this[i++] = dealer;
 
     return *this;
 }
+
+// char Dealer::editPunkt()
+// {
+//     cout << "-------------------------" << endl;
+//     cout << "| 1. Edit name          |" << endl;
+//     cout << "| 2. Edit birthday      |" << endl;
+//     cout << "| 3. Edit license       |" << endl;
+//     cout << "| 4. Edit taxe          |" << endl;
+//     cout << "| 5. Edit passport      |" << endl;
+//     cout << "| 6. Edit country       |" << endl;
+//     cout << "| 7. Edit address       |" << endl;
+//     cout << "| 8. Edit all           |" << endl;
+//     cout << "-------------------------" << endl;
+//     char option;
+//     cin >> option;
+//     return option;
+// }
+
+// Dealer& Dealer::editPerson()
+// {
+//     cout << "What the dealer do you want to edit?\nChoice: ";
+//     int numberDealer;
+//     cin >> numberDealer;
+//     switch (editPunkt())
+//     {
+//     case '1':
+//     {
+//         char newName[30];
+//         cout << "Enter new name: ";
+//         cin >> newName;
+//         this->setName(newName);
+//         break;
+//     }
+//     case '2':
+//     {
+//         Data newBirthday;
+//         cout << "Enter new birthday(XX.YY.ZZZZ): ";
+//         cin >> newBirthday.day >> newBirthday.month >> newBirthday.year;
+//         this->setBirthday(newBirthday);
+//         break;
+//     }
+//     case '3':
+//     {
+//         char newLicense[30];
+//         cout << "Enter new license: ";
+//         cin >> newLicense;
+//         this->setLicense(newLicense);
+//         break;
+//     }
+//     case '4':
+//     {
+//         Taxes newTaxe;
+//         cout << "Enter new taxe:\nSumm - ";
+//         cin >> newTaxe.sum;
+//         cout << "Time(XX.YY.ZZZZ) - ";
+//         cin >> newTaxe.time.day >> newTaxe.time.month >> newTaxe.time.year;
+//         this->setTaxes(newTaxe);
+//         break;
+//     }
+//     case '5':
+//     {
+//         char newPassport[8];
+//         cout << "Enter new data to passport: ";
+//         cin >> newPassport;
+//         this->setPassport(newPassport);
+//         break;
+//     }
+//     case '6':
+//     {
+//         Countries newCountry;
+//         cout << "Enter new country(name and time): " << endl;
+//         cout << "Name of country - ";
+//         cin >> newCountry.countryName;
+//         cout << "Time(XX.YY.ZZZZ) - ";
+//         cin >> newCountry.time.day >> newCountry.time.month >> newCountry.time.year;
+//         this->setCountry(newCountry);
+//         break;
+//     }
+//     case '7':
+//     {
+//         char newAddress[30];
+//         cout << "Enter new address: ";
+//         int i = 0;
+//         while(newAddress[i] != '\n')
+//         {
+//             cin >> newAddress;
+//             ++i;
+//         }
+//         this->setAddress(newAddress);
+//         break;
+//     }
+//     case '8':
+//     {
+//         Dealer newDealer;
+//         cin >> newDealer;
+//         *this = newDealer;
+//         break;
+//     }
+//     }
+//     return *this;
+// }
+
+// void Dealer::printHeader() {
+//     cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
+//     cout << "|" << "Delaler inforamtion" << setw(164) << "|"<< endl;
+//     cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
+//     cout << "| " << setw(28) << left << "Name" << " | " << setw(10) << left << "Birthday" << " | " << setw(28) << left << "License" << " | " << setw(10) << left << "Tax Sum" << " | " << setw(10) << left << "Tax Date" << " | " << setw(8) << left << "Passport" << " | " << setw(15) << left << "Country" << " | " << setw(10) << left << "Visit Date" << " | " << setw(37) << left << "Address" << " |" << endl;
+//     cout << "-" << setw(31) << setfill('-') << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setw(13) << "" << "-" << setw(13) << "" << "-" << setw(11) << "" << "-" << setw(18) << "" << "-" << setw(13) << "" << "-" << setw(31) << "" << "-" << setfill(' ') << endl;
+// }
 
 void Dealer::updateFields(int choiceField)
 {
@@ -89,22 +198,22 @@ void Dealer::updateFields(int choiceField)
     {
         case 6:
         {
-            cout << "Новый номер паспорта: ";
+            cout << "Новый паспорт: ";
             passport = getValidPassword(cin);
             this->setPassport(passport);
             break;
         }
         case 7:
         {
-            cout << "Новое название страны: ";
-            country.countryName = safeGetline(cin, true);
+            cout << "Новое имя страны: ";
+            country.countryName = isUpp(cin, true);
             country.time = this->getCountry().time;
             this->setCountry(country);
             break;   
         }
         case 8:
         {
-            cout << "Новая дата визита(YYYY-MM-DD): ";
+            cout << "Новая дата посещения(YYYY-MM-DD): ";
             country.time = readDate(cin);
             country.countryName = this->getCountry().countryName;
             this->setCountry(country);
@@ -113,7 +222,7 @@ void Dealer::updateFields(int choiceField)
         case 9:
         {
             cout << "Новый адресс: ";
-            address = safeGetline(cin, true);
+            address = isUpp(cin, true);
             this->setAddress(address);
             break;   
         }
@@ -122,7 +231,7 @@ void Dealer::updateFields(int choiceField)
 
 void Dealer::printHeader() const {
     cout << left;
-    cout << "| " << setw(12) << "Имя" << " | " << setw(12) << "Дата рождения" << " | " << setw(7) << "Лицензия" << " | " << setw(7) << "Сумма налога" << " | " << setw(12) << "Дата налога" << " | " << setw(8) << "Паспорт" << " | " << setw(7) << "Страна" << " | " << setw(12) << "Дата визита" << " | " << setw(7) << "Адресс" << " |" << endl;
+    cout << "| " << setw(12) << "Name" << " | " << setw(12) << "Birthday" << " | " << setw(7) << "License" << " | " << setw(7) << "Tax Sum" << " | " << setw(12) << "Tax Date" << " | " << setw(8) << "Passport" << " | " << setw(7) << "Country" << " | " << setw(12) << "Visit Date" << " | " << setw(7) << "Address" << " |" << endl;
 }
 
 void Dealer::printTable() const {
@@ -135,4 +244,19 @@ void Dealer::printTable() const {
     
     cout << left;
     cout << "| " << setw(12) << name << " | " << setw(12) << birthdayStr << " | " << setw(7) << license << " | " << setw(7) << taxSumStr << " | " << setw(12) << taxDateStr << " | " << setw(8) << passport << " | " << setw(7) << country.countryName << " | " << setw(12) << visitDateStr << " | " << setw(7) << address << " |" << endl;
+}
+
+void Dealer::fieldBy(){
+    static const string dealerOptions[9] = {
+        "1. Имя",
+        "2. День рождения",
+        "3. Лицензия",
+        "4. Сумма налога",
+        "5. Дата налога",
+        "6. Паспорт",
+        "7. Имя страны",
+        "8. Дата посещения",
+        "9. Адресс"
+    };
+    drawMenu("Поля", dealerOptions, 9);
 }

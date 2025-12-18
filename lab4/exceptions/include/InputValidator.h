@@ -3,10 +3,13 @@
 
 #include "InputException.h"
 #include "../../include/Person.h"
+#include <iostream>
+#include <sstream>
 #include <limits>
 #include <locale>
 #include <stdexcept>
 #include <tuple>
+struct Data;
 
 using namespace std;
 
@@ -19,6 +22,7 @@ T getValidNumericValue(istream& stream, T min, T max)
     {
         try
         {
+            stream >> value;
             if (!getline(stream, line))
             {
                 if (stream.eof())
@@ -38,9 +42,7 @@ T getValidNumericValue(istream& stream, T min, T max)
                 }
                 else
                 {
-                    stringstream err_ss;
-                    err_ss << "Число вне допустимого диапазона (от " << fixed << setprecision(1) << min << " до " << max << ").";
-                    throw InputException(200, err_ss.str());
+                    throw InputException(200, "Число вне допустимого диапазона");
                 }
             }
             else
@@ -57,7 +59,7 @@ T getValidNumericValue(istream& stream, T min, T max)
 
 string safeGetline(istream& is, bool isRussianOnly);
 string getValidPassword(istream& stream);
-Date readDate(istream& stream);
+Data readDate(istream& stream);
 bool isRussianOnly(const string& str);
 bool isEnglishOnly(const string& str);
 string isUpp(istream& is, bool isRussian);

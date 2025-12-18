@@ -1,74 +1,26 @@
-#ifndef PERSON_H
-#define PERSON_H
+#pragma once
 
+#include "../exceptions/include/InputValidator.h"
 #include <iostream>
-#include <string.h>
 #include <sstream>
+#include <string.h>
 #include<iomanip>
 using namespace std;
 
 template<typename T> class Deque;
 
-struct Date 
+struct Data 
 {
     int day, month, year;
 
-    Date()
-    {
-        this->day = 1;
-        this->month = 1;
-        this->year = 1999;
-    }
-    Date(int d, int m, int y) 
-    {
-        this->day = d;
-        this->month = m;
-        this->year = y;
-    }
-    Date(const Date& other)
-    {
-        this->day = other.day;
-        this->month = other.month;
-        this->year = other.year;
-    }
     string toString() const;
-    static Date fromString(const string& dateStr);
+    static Data fromString(const string& dateStr);
 
-    friend ostream& operator<<(ostream& os, const Date& date);
-    friend istream& operator>>(istream& is, Date& date);
-    Date& operator=(const Date& other)
-    {
-        if (this != &other)
-        {
-            this->day = other.day;
-            this->month = other.month;
-            this->year = other.year;
-        }
-        return *this; 
-    }
-    bool operator>(const Date& a) const
+    friend ostream& operator<<(ostream& os, const Data& date);
+    friend istream& operator>>(istream& is, Data& date);
+    bool operator>(const Data& a) 
     {
         return tie(this->year, this->month, this->day) > tie(a.year, a.month, a.day);
-        //return (m->date.year > latestDate.year || 
-        //(m->date.year == latestDate.year && m->date.month > latestDate.month) ||
-        //(m->date.year == latestDate.year && m->date.month == latestDate.month && m->date.day > latestDate.day))
-
-    }
-    bool operator<(const Date& a) const
-    {
-        return tie(this->year, this->month, this->day) < tie(a.year, a.month, a.day);
-        //return (m->date.year > latestDate.year || 
-        //(m->date.year == latestDate.year && m->date.month > latestDate.month) ||
-        //(m->date.year == latestDate.year && m->date.month == latestDate.month && m->date.day > latestDate.day))
-
-    }
-    bool operator==(const Date& a) const
-    {
-        return tie(this->year, this->month, this->day) == tie(a.year, a.month, a.day);
-    }
-    bool operator!=(const Date& other) const
-    {
-        return !(*this == other);
     }
 } ;
 
@@ -83,21 +35,23 @@ class Person
 {
 protected:
     string name;
-    Date birthday;
+    Data birthday;
     static SearchMode currentSearchMode;
 
 public:
     Person()
     {
         this->name = "NoName";
-        this->birthday = Date();
+        this->birthday = {0, 0, 0};
     }
-    Person(string n, Date data)
+    Person(string n, Data data)
     {
         this->name = n;
         this->birthday = data;
     }
-    virtual ~Person() {}
+    virtual ~Person()
+    {
+    }
 
     static void setSearchMode(SearchMode mode)
     {
@@ -115,12 +69,11 @@ public:
     bool operator<(const Person& other) const;
     void setName(string);
     string getName() const;
-    void setBirthday(Date);
-    Date getBirthday() const;
+    void setBirthday(Data);
+    Data getBirthday() const;
+    virtual void fieldBy();
     virtual void updateFields(int);
 
     virtual void printHeader() const = 0;
     virtual void printTable() const = 0;
 };
-
-#endif

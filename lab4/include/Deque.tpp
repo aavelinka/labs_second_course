@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Deque.hpp"
 template <typename T>
 Deque<T>& Deque<T>::operator=(const Deque<T>& otherDeque)
     {

@@ -4,11 +4,6 @@
 #include <ctime>
 #include <regex>
 
-bool containsOnly(const string& str, const regex& pattern)
-{
-    return regex_match(str, pattern);
-}
-
 bool isEmptyOrWhitespace(const string& str) 
 {
     if (str.empty()) 
@@ -156,14 +151,14 @@ string getValidPassword(istream& stream)
     return password;
 }
 
-Date readDate(istream& stream)
+Data readDate(istream& stream)
 {
     string dateStr;
-    Date date;
+    Data date;
     
     time_t now = time(0);
     tm* ltm = localtime(&now);
-    Date currentDate;  
+    Data currentDate;  
     currentDate.day = ltm->tm_mday;
     currentDate.month = 1 + ltm->tm_mon;
     currentDate.year = 1900 + ltm->tm_year;
@@ -174,7 +169,7 @@ Date readDate(istream& stream)
         {
             if (!getline(stream, dateStr))
             {
-                throw std::runtime_error("Конец потока ввода."); 
+                throw runtime_error("Конец потока ввода."); 
             }
             
             if (dateStr.length() != 10 || dateStr[4] != '-' || dateStr[7] != '-')
@@ -182,7 +177,7 @@ Date readDate(istream& stream)
                 throw InputException(500, "Некорректный формат даты. Ожидался YYYY-MM-DD.");
             }
             
-            date = Date::fromString(dateStr); 
+            date = Data::fromString(dateStr); 
             
             if (date.year < 1999 || date > currentDate || 
                 date.month < 1 || date.month > 12 || 
@@ -203,7 +198,7 @@ Date readDate(istream& stream)
         {
             cout << "Ошибка: " << e.what() << "\n";
         }
-        catch (const std::exception& e)
+        catch (const exception& e)
         {
             cout << "Ошибка: " << e.what() << "\n";
         }

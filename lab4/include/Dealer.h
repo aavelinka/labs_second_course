@@ -14,7 +14,7 @@ public:
     {
         this->address = " - ";
     }
-    Dealer(string n, Date data, string l, Taxes t, string p, Countries c, string ad) :  Employer(n, data, l, t), Tourist(n, data, p, c)
+    Dealer(string n, Data data, string l, Taxes t, string p, Countries c, string ad) :  Employer(n, data, l, t), Tourist(n, data, p, c)
     {
         this->address = ad;
     }
@@ -29,6 +29,7 @@ public:
     string getAddress() const;
 
     Dealer& addDealer(int&);
+    virtual void fieldBy() override;
     virtual void updateFields(int) override;
     // virtual char editPunkt() override;
     // virtual Dealer& editPerson() override;

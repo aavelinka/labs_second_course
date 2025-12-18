@@ -5,7 +5,7 @@
 
 struct Countries
 {
-    Date time;
+    Data time;
     string countryName;
 };
 
@@ -20,9 +20,11 @@ public:
     {
         this->passport = " - ";
         this->country.countryName = " - ";
-        this->country.time = Date(1, 1, 1999);
+        this->country.time.day = 0;
+        this->country.time.month = 0;
+        this->country.time.year = 0;
     }
-    Tourist(string n, Date data, string p, Countries c) : Person(n, data)
+    Tourist(string n, Data data, string p, Countries c) : Person(n, data)
     {
         this->passport = p;
         this->country.time = c.time;
@@ -41,6 +43,7 @@ public:
     Countries getCountry() const;
 
     Tourist& addTourist(int&);
+    virtual void fieldBy() override;
     virtual void updateFields(int) override;
     // virtual char editPunkt() override;
     // virtual Tourist& editPerson() override;

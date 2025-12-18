@@ -5,7 +5,7 @@
 
 struct Taxes
 {
-    Date time;
+    Data time;
     double sum;
 };
 
@@ -20,9 +20,9 @@ public:
     {
         this->license = " - ";
         this->taxe.sum = 0.0;
-        this->taxe.time = Date(1, 1, 1999);
+        this->taxe.time = {0, 0, 0};
     }
-    Employer(string n, Date data, string l, Taxes t) : Person(n, data)
+    Employer(string n, Data data, string l, Taxes t) : Person(n, data)
     {
         this->license = l;
         this->taxe.sum = t.sum;
@@ -47,6 +47,7 @@ public:
     Taxes getTaxes() const;
 
     Employer& addEmployer(int&);
+    virtual void fieldBy() override;
     virtual void updateFields(int) override;
     // virtual char editPunkt() override;
     // virtual Employer& editPerson() override;

@@ -2,8 +2,7 @@
 
 int main()
 {
-    Algorithm::run();
-    
-    cout << "До новой встречи!";
+    run();
+    cout << "Goodbye!" << endl;
     return 0;
 }
