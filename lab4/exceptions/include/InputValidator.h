@@ -16,45 +16,45 @@ using namespace std;
 template <typename T>
 T getValidNumericValue(istream& stream, T min, T max)
 {
-    T value;
-    string line;
-    while(true)
+    T value{};
+    int flags = 0;
+
+    do
     {
         try
         {
+            flags = 0;
             stream >> value;
-            if (!getline(stream, line))
+            flags = static_cast<int>(stream.rdstate()); //состояние потока для проверки битов ошибок
+
+            if (flags & ios::eofbit)
             {
-                if (stream.eof())
-                {
-                    throw runtime_error("Конец потока ввода."); 
-                }
-                stream.clear();
-                throw InputException(100, "Ошибка чтения строки.");
+                throw runtime_error("Конец потока ввода.");
             }
-            
-            stringstream ss(line);
-            if (ss >> value && ss.eof())
-            {
-                if (value >= min && value <= max)
-                {
-                    return value;
-                }
-                else
-                {
-                    throw InputException(200, "Число вне допустимого диапазона");
-                }
-            }
-            else
+
+            if (flags & ios::failbit)
             {
                 throw InputException(201, "Некорректный ввод. Ожидалось число.");
             }
+
+            if (value < min || value > max)
+            {
+                throw InputException(200, "Число вне допустимого диапазона");
+            }
+
+            stream.ignore(numeric_limits<streamsize>::max(), '\n');
         }
         catch (const InputException& e)
         {
             cout << "Error: " << e.what() << "\n";
+            stream.clear();
+            stream.ignore(numeric_limits<streamsize>::max(), '\n');
+            flags = 1;
         }
     }
+    while (flags);
+
+    return value;
 }
 
 string safeGetline(istream& is, bool isRussianOnly);
