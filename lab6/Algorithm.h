@@ -24,6 +24,43 @@ inline PersonIterator lastIterator(PersonDeque& deque) {
     return last;
 }
 
+template <typename T, typename Value>
+Deque<T> dequeSearch(const Deque<T>& deque, const Value& pattern) {
+    Deque<T> result;
+    for (auto it = deque.begin(); it != deque.end(); ++it) {
+        if (*it != nullptr && **it == pattern) {
+            result.pushBack(*it);
+        }
+    }
+    return result;
+}
+
+template <typename T, typename Compare>
+void dequeSort(Deque<T>& deque, Compare comp) {
+    if (deque.begin() == deque.end()) {
+        return;
+    }
+
+    bool swapped;
+    do {
+        swapped = false;
+        for (auto current = deque.begin(); current != deque.end(); ++current) {
+            auto next = current;
+            ++next;
+            if (next == deque.end()) {
+                break;
+            }
+
+            if (comp(*next, *current)) {
+                auto temp = *current;
+                *current = *next;
+                *next = temp;
+                swapped = true;
+            }
+        }
+    } while (swapped);
+}
+
 void drawMenu(const string& title, const string options[], int numOptions);
 
 template <typename T>
@@ -165,7 +202,7 @@ void searchInDeque(PersonDeque& deque) {
             break;
     }
 
-    Deque<Person*> searchResults = deque.search(searchObj);
+    Deque<Person*> searchResults = dequeSearch(deque, *searchObj);
     delete searchObj;
     Person::setSearchMode(FULL_MATCH);
 
@@ -208,7 +245,13 @@ void sortDequeByField(PersonDeque& deque) {
         return;
     }
 
-    deque.sort();
+    auto comparator = [](Person* lhs, Person* rhs) {
+        if (lhs == nullptr || rhs == nullptr) {
+            return rhs != nullptr;
+        }
+        return *lhs < *rhs;
+    };
+    dequeSort(deque, comparator);
     Person::setSearchMode(FULL_MATCH);
 
     cout << "Сортировка прошла успешно." << endl;
@@ -318,7 +361,7 @@ void loadDequeFromFile(PersonDeque& deque, const string& typeName) {
         }
 
         clearDeque<T>(deque);
-        std::deque<Person*> bufferQueue; //std::deque
+        std::deque<Person*> bufferQueue; //std::deque временный буфер - в него копируется дек records
         for (auto it = records.begin(); it != records.end(); ++it) {
             bufferQueue.push_back(*it);
         }

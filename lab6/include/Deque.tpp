@@ -167,53 +167,6 @@ Deque<T>& Deque<T>::operator=(const Deque<T>& otherDeque)
     }
 
     template <typename T>
-    Deque<T> Deque<T>::search(T key)
-    {
-        Deque<T> result;
-        for (Iterator it = begin(); it != end(); ++it)
-        {
-            if(**it == *key)
-            {
-                result.pushBack(*it);
-            }
-        }
-
-        return result;
-    }
-    
-    template <typename T>
-    void Deque<T>::sort()
-    {
-        if(top == nullptr || top == buttom)
-        {
-            return;
-        }
-        
-        bool swapped;
-        do
-        {
-            swapped = false;
-            for (Iterator current = begin(); current != end(); ++current)
-            {
-                Iterator next = current;
-                ++next;
-                if (next == end())
-                {
-                    break;
-                }
-
-                if(**next < **current)
-                {
-                    T temp = *current;
-                    *current = *next;
-                    *next = temp;
-                    swapped = true;
-                }
-            }
-        } while(swapped);
-    }
-    
-    template <typename T>
     void Deque<T>::clear()
     {
         for (Iterator it = begin(); it != end(); )

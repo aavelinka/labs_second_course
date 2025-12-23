@@ -74,8 +74,6 @@ public:
     bool isEmpty();
     
     int size();
-    Deque<T> search(T key);
-    void sort();
     void clear();
     Node<T>* getTop() const;
     Iterator begin() const { return Iterator(top); }
